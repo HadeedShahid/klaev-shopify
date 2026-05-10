@@ -1,0 +1,110 @@
+/* ─── Geist display font ─────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Geist";
+  src: url("https://fonts.gstatic.com/s/geist/v3/gyByhwUxId8gMEwcGFU.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+
+:root {
+  --lv-radius: 0px;
+
+  /* colors */
+  --lv-background:          oklch(0.985 0.003 90);
+  --lv-foreground:          oklch(0.18  0.005 60);
+  --lv-bone:                oklch(0.96  0.008 85);
+  --lv-stone-light:         oklch(0.92  0.006 80);
+  --lv-ink:                 oklch(0.14  0.005 60);
+  --lv-card:                oklch(1     0     0);
+  --lv-card-foreground:     oklch(0.18  0.005 60);
+  --lv-popover:             oklch(1     0     0);
+  --lv-popover-foreground:  oklch(0.18  0.005 60);
+  --lv-primary:             oklch(0.14  0.005 60);
+  --lv-primary-foreground:  oklch(0.985 0.003 90);
+  --lv-secondary:           oklch(0.94  0.006 85);
+  --lv-secondary-foreground:oklch(0.18  0.005 60);
+  --lv-muted:               oklch(0.94  0.006 85);
+  --lv-muted-foreground:    oklch(0.5   0.008 70);
+  --lv-accent:              oklch(0.92  0.006 80);
+  --lv-accent-foreground:   oklch(0.18  0.005 60);
+  --lv-destructive:         oklch(0.55  0.2   27);
+  --lv-destructive-foreground: oklch(0.985 0.003 90);
+  --lv-border:              oklch(0.88  0.006 80);
+  --lv-input:               oklch(0.88  0.006 80);
+  --lv-ring:                oklch(0.14  0.005 60);
+
+  /* typography */
+  --lv-font-sans:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --lv-font-display: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --lv-tracking-tightest:      -0.04em;
+  --lv-tracking-wider-fashion:  0.18em;
+}
+
+.dark {
+  --lv-background:           oklch(0.14  0.005 60);
+  --lv-foreground:           oklch(0.96  0.005 90);
+  --lv-card:                 oklch(0.18  0.005 60);
+  --lv-card-foreground:      oklch(0.96  0.005 90);
+  --lv-primary:              oklch(0.96  0.005 90);
+  --lv-primary-foreground:   oklch(0.14  0.005 60);
+  --lv-secondary:            oklch(0.22  0.005 60);
+  --lv-secondary-foreground: oklch(0.96  0.005 90);
+  --lv-muted:                oklch(0.22  0.005 60);
+  --lv-muted-foreground:     oklch(0.7   0.008 70);
+  --lv-border:               oklch(1     0     0  / 12%);
+  --lv-ring:                 oklch(0.96  0.005 90);
+}
+
+/* ─── Base resets ────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  border-color: var(--lv-border);
+}
+
+::selection {
+  background-color: var(--lv-foreground);
+  color: var(--lv-background);
+}
+
+/* ─── Utility classes ────────────────────────────────────────────────────── */
+
+/* Section eyebrow label — 11px, uppercase, wide-tracked */
+.lv-text-eyebrow {
+  font-size: 11px;
+  letter-spacing: var(--lv-tracking-wider-fashion);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Display typeface — Geist with tight tracking */
+.lv-font-display {
+  font-family: var(--lv-font-display);
+  letter-spacing: var(--lv-tracking-tightest);
+}
+
+/* Ink-draw animated underline on hover */
+.lv-hover-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.4s ease;
+}
+.lv-hover-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* Marquee — pair with a doubled inner element for seamless loop */
+.lv-marquee {
+  animation: lv-marquee 40s linear infinite;
+}
+
+@keyframes lv-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
