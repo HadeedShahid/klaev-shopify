@@ -162,10 +162,21 @@
     }
   }
 
-  /* ── Force 4-column grid on desktop ── */
+  /* ── Force 3-column grid on desktop ── */
   /* 3-class specificity beats Horizon's scoped 2-class inline style block */
   .product-grid-container .product-grid:is(.product-grid--grid) {
     --product-grid-columns-desktop: repeat(3, 1fr);
+  }
+
+  /* ── Footer breathing room ── */
+  .product-grid-container {
+    padding-block-end: 10rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .product-grid-container {
+      padding-block-end: 14rem;
+    }
   }
 
 {% endstylesheet %}
