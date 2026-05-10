@@ -1113,6 +1113,49 @@
     font-family: var(--menu-localization-font);
     font-size: var(--menu-localization-font-size);
   }
+
+  /* ── Loveable: backdrop blur ── */
+  header-component {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  /* ── Loveable: logo — Geist, wide tracking ── */
+  .header-logo {
+    font-family: var(--lv-font-display) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3em !important;
+    text-transform: uppercase;
+  }
+
+  /* ── Loveable: nav links — eyebrow style + ink-draw underline ── */
+  .header-menu .menu-list__link-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: var(--lv-tracking-wider-fashion);
+    text-transform: uppercase;
+    padding-inline: 0;
+  }
+
+  .header-menu .overflow-menu::part(list) {
+    gap: 28px;
+    margin-inline: 0;
+  }
+
+  .header-menu .menu-list__list-item:where(:hover, :focus-within) .menu-list__link-title {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+  }
+
+  .header-menu .menu-list__link-title {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.4s ease;
+  }
 {% endstylesheet %}
 
 {% unless request.design_mode %}
