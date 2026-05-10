@@ -12,6 +12,10 @@
       "type": "hero-editorial",
       "settings": {}
     },
+    "marquee_banner_main": {
+      "type": "marquee-banner",
+      "settings": {}
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -289,6 +293,7 @@
   },
   "order": [
     "hero_editorial_main",
+    "marquee_banner_main",
     "hero_jVaWmY",
     "product_list_fa6P9H"
   ]
