@@ -1,0 +1,383 @@
+<section class="hero-editorial">
+  <div class="hero-editorial__grid">
+
+    {%- comment -%} ── Content column ── {%- endcomment -%}
+    <div class="hero-editorial__content">
+
+      <div class="hero-editorial__eyebrow">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="lv-text-eyebrow hero-editorial__eyebrow-text">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="hero-editorial__body">
+        <h1 class="hero-editorial__heading lv-font-display">
+          {{ section.settings.heading | newline_to_br }}
+          {%- if section.settings.heading_italic != blank -%}
+            <span class="hero-editorial__heading-italic">{{ section.settings.heading_italic }}</span>
+          {%- endif -%}
+        </h1>
+
+        {%- if section.settings.subtext != blank -%}
+          <p class="hero-editorial__subtext">{{ section.settings.subtext }}</p>
+        {%- endif -%}
+
+        <div class="hero-editorial__buttons">
+          {%- if section.settings.primary_button_label != blank -%}
+            <a
+              href="{{ section.settings.primary_button_link | default: '#' }}"
+              class="lv-text-eyebrow hero-editorial__btn hero-editorial__btn--primary"
+            >
+              {{ section.settings.primary_button_label }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.secondary_button_label != blank -%}
+            <a
+              href="{{ section.settings.secondary_button_link | default: '#' }}"
+              class="lv-text-eyebrow hero-editorial__btn hero-editorial__btn--secondary"
+            >
+              {{ section.settings.secondary_button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="hero-editorial__stats">
+        {%- for i in (1..3) -%}
+          {%- assign num_key   = 'stat_' | append: i | append: '_number' -%}
+          {%- assign label_key = 'stat_' | append: i | append: '_label' -%}
+          {%- if section.settings[label_key] != blank -%}
+            <div class="hero-editorial__stat">
+              <p class="hero-editorial__stat-number lv-text-eyebrow">{{ section.settings[num_key] }}</p>
+              <p class="hero-editorial__stat-label lv-text-eyebrow">{{ section.settings[label_key] }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+
+    {%- comment -%} ── Image column ── {%- endcomment -%}
+    <div class="hero-editorial__media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1600
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            class: 'hero-editorial__image',
+            alt: section.settings.image.alt,
+            sizes: '(min-width: 1024px) 58vw, 100vw',
+            widths: '600, 900, 1200, 1600'
+        }}
+      {%- else -%}
+        <img
+          src="https://cdn.shopify.com/s/files/1/0624/0796/6791/files/hero-1-DQtgQnR.jpg?v=1778408149"
+          alt="Hero"
+          class="hero-editorial__image"
+          loading="eager"
+          fetchpriority="high"
+        >
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .hero-editorial__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hero-editorial__grid {
+      grid-template-columns: 5fr 7fr;
+    }
+  }
+
+  /* ── Content column ── */
+  .hero-editorial__content {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hero-editorial__content {
+      order: 1;
+      padding: 3rem;
+    }
+  }
+
+  .hero-editorial__eyebrow-text {
+    color: var(--lv-muted-foreground);
+  }
+
+  /* ── Heading ── */
+  .hero-editorial__body {
+    padding-block: 1rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hero-editorial__body {
+      padding-block: 0;
+    }
+  }
+
+  .hero-editorial__heading {
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.92;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .hero-editorial__heading-italic {
+    font-style: italic;
+    font-weight: 300;
+    display: block;
+  }
+
+  .hero-editorial__subtext {
+    margin-top: 1rem;
+    max-width: 28rem;
+    font-size: 0.875rem;
+    color: var(--lv-muted-foreground);
+    line-height: 1.625;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hero-editorial__subtext {
+      margin-top: 2rem;
+    }
+  }
+
+  /* ── Buttons ── */
+  .hero-editorial__buttons {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hero-editorial__buttons {
+      margin-top: 2.5rem;
+    }
+  }
+
+  .hero-editorial__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .hero-editorial__btn--primary {
+    background-color: var(--lv-ink);
+    color: var(--lv-background);
+  }
+
+  .hero-editorial__btn--primary:hover {
+    background-color: oklch(from var(--lv-ink) l c h / 0.9);
+  }
+
+  .hero-editorial__btn--secondary {
+    border: 1px solid var(--lv-ink);
+    color: var(--lv-foreground);
+    background-color: transparent;
+  }
+
+  .hero-editorial__btn--secondary:hover {
+    background-color: var(--lv-ink);
+    color: var(--lv-background);
+  }
+
+  /* ── Stats ── */
+  .hero-editorial__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    border-top: 1px solid var(--lv-border);
+    padding-top: 1rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hero-editorial__stats {
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+    }
+  }
+
+  .hero-editorial__stat-number {
+    color: var(--lv-foreground);
+    margin: 0;
+  }
+
+  .hero-editorial__stat-label {
+    color: var(--lv-muted-foreground);
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  /* ── Image column ── */
+  .hero-editorial__media {
+    order: 1;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hero-editorial__media {
+      order: 2;
+    }
+  }
+
+  .hero-editorial__image,
+  .hero-editorial__image-placeholder {
+    display: block;
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hero-editorial__image,
+    .hero-editorial__image-placeholder {
+      height: calc(100vh - var(--header-group-height));
+    }
+  }
+
+  .hero-editorial__placeholder-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-editorial__image-placeholder {
+    background-color: var(--lv-stone-light);
+    overflow: hidden;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Editorial",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "SS·26 — Volume One"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Quiet\nobjects,"
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Heading italic line",
+      "default": "loud intent."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "A study in restraint. Footwear and apparel built from honest materials — designed once, worn always."
+    },
+    {
+      "type": "header",
+      "content": "Primary button"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Label",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Label",
+      "default": "Lookbook"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Stats"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_number",
+      "label": "Stat 1 number",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Italian leather"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_number",
+      "label": "Stat 2 number",
+      "default": "02"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Goodyear welt"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_number",
+      "label": "Stat 3 number",
+      "default": "03"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Made slowly"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Editorial"
+    }
+  ]
+}
+{% endschema %}

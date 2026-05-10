@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */{
   "sections": {
+    "hero_editorial_main": {
+      "type": "hero-editorial",
+      "settings": {}
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -284,6 +288,7 @@
     }
   },
   "order": [
+    "hero_editorial_main",
     "hero_jVaWmY",
     "product_list_fa6P9H"
   ]
