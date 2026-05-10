@@ -64,10 +64,7 @@
   </div>
 
   <div class="pce-card__info">
-    <div class="pce-card__meta">
-      <p class="lv-text-eyebrow pce-card__category">{{ product.type }}</p>
-      <p class="pce-card__price">{{ product.price | money }}</p>
-    </div>
+    <p class="lv-text-eyebrow pce-card__category">{{ product.type }}</p>
     <h3 class="pce-card__title">{{ product.title }}</h3>
     {%- if color_values.size > 0 -%}
       <div class="pce-card__colors">
@@ -78,6 +75,7 @@
         {%- endfor -%}
       </div>
     {%- endif -%}
+    <p class="pce-card__price">{{ product.price | money }}</p>
   </div>
 
 </a>
