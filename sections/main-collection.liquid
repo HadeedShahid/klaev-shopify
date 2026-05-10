@@ -58,9 +58,7 @@
             data-product-id="{{ product.id }}"
             ref="cards[]"
           >
-            {% # theme-check-disable %}
-            {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-            {% # theme-check-enable %}
+            {% render 'product-card-editorial', product: product %}
           </li>
         {% endfor %}
       {% endcapture %}
@@ -75,6 +73,102 @@
     {% endpaginate %}
   </div>
 </results-list>
+
+{% stylesheet %}
+  /* ── Filter bar: sticky + backdrop blur ── */
+  .facets-block-wrapper--horizontal,
+  .facets-toggle {
+    position: sticky;
+    top: var(--header-group-height, 65px);
+    z-index: 40;
+    background-color: color-mix(in oklch, var(--lv-background) 90%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  /* mobile: only .facets-toggle is visible, give it the border */
+  .facets-toggle {
+    border-bottom: 1px solid var(--lv-border);
+  }
+
+  /* desktop: .facets-block-wrapper--horizontal takes over */
+  @media screen and (min-width: 750px) {
+    .facets-toggle {
+      border-bottom: none;
+    }
+    .facets-block-wrapper--horizontal {
+      border-bottom: 1px solid var(--lv-border);
+    }
+  }
+
+  /* ── Filter pill base ── */
+  .facets--horizontal .facets__summary,
+  .facets--horizontal .facets__label,
+  .sorting-filter__horizontal .facets__summary {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .facets--horizontal .facets__summary {
+    border-radius: 0;
+    padding: 0.5rem 1rem;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .facets--horizontal .facets__summary:hover {
+    background-color: var(--lv-bone);
+  }
+
+  details[open] > .facets--horizontal .facets__summary,
+  .facets--horizontal details[open] > summary.facets__summary {
+    background-color: var(--lv-ink);
+    color: var(--lv-background);
+  }
+
+  /* ── Sort button ── */
+  .sorting-filter__horizontal .facets__summary {
+    border-radius: 0;
+    padding: 0.5rem 1rem;
+  }
+
+  /* ── Grid top padding (filter bar excluded) ── */
+  #ResultsList {
+    padding-block-start: 2rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    #ResultsList {
+      padding-block-start: 3rem;
+    }
+  }
+
+  /* ── Mobile: align grid with filter bar horizontal padding ── */
+  @media screen and (max-width: 749px) {
+    #ResultsList {
+      padding-inline: 1rem;
+    }
+  }
+
+  /* ── Product grid gaps ── */
+  .product-grid {
+    --product-grid-gap: 3rem 1rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .product-grid {
+      --product-grid-gap: 3rem 1.5rem;
+    }
+  }
+
+  /* ── Force 4-column grid on desktop ── */
+  /* 3-class specificity beats Horizon's scoped 2-class inline style block */
+  .product-grid-container .product-grid:is(.product-grid--grid) {
+    --product-grid-columns-desktop: repeat(3, 1fr);
+  }
+
+{% endstylesheet %}
 
 {% schema %}
 {

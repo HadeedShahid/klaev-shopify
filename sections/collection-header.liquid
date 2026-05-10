@@ -1,0 +1,82 @@
+<div class="collection-header">
+  <p class="lv-text-eyebrow collection-header__eyebrow">
+    Collection / SS·{{ 'now' | date: '%y' }}
+  </p>
+  <div class="collection-header__bottom">
+    <h1 class="lv-font-display collection-header__title">
+      {{ collection.title }}<span class="collection-header__title-italic"> — index.</span>
+    </h1>
+    <p class="collection-header__count">
+      {{ collection.products_count }} pieces in current rotation. Sorted by intent.
+    </p>
+  </div>
+</div>
+
+{% stylesheet %}
+  .collection-header {
+    border-bottom: 1px solid var(--lv-border);
+    padding: 2rem 1.5rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .collection-header {
+      padding: 4rem 2.5rem;
+    }
+  }
+
+  .collection-header__eyebrow {
+    color: var(--lv-muted-foreground);
+    margin: 0;
+  }
+
+  .collection-header__bottom {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .collection-header__bottom {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  .collection-header__title {
+    font-size: 3rem;
+    line-height: 0.95;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    .collection-header__title {
+      font-size: 4.5rem;
+    }
+  }
+
+  .collection-header__title-italic {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .collection-header__count {
+    font-size: 0.875rem;
+    color: var(--lv-muted-foreground);
+    max-width: 20rem;
+    margin: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection Header",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [],
+  "presets": []
+}
+{% endschema %}

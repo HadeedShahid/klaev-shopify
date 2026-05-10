@@ -1,0 +1,83 @@
+{%- doc -%}
+  Renders a product card matching the editorial design system.
+  @param {object} product - The product object
+{%- enddoc -%}
+
+{%- liquid
+  assign color_option_index = nil
+  for option in product.options
+    assign option_downcase = option | downcase
+    if option_downcase == 'color' or option_downcase == 'colour'
+      assign color_option_index = forloop.index0
+      break
+    endif
+  endfor
+
+  assign color_values = ''
+  if color_option_index != nil
+    for variant in product.variants
+      assign color_val = variant.options[color_option_index]
+      unless color_values contains color_val
+        assign color_values = color_values | append: color_val | append: '|'
+      endunless
+    endfor
+    assign color_values = color_values | split: '|' | compact
+  endif
+
+  assign badge = nil
+  if product.tags contains 'new'
+    assign badge = 'New'
+  elsif product.available == false
+    assign badge = 'Sold out'
+  endif
+-%}
+
+<a href="{{ product.url }}" class="pce-card">
+
+  <div class="pce-card__media">
+    {%- if product.featured_image -%}
+      {{
+        product.featured_image
+        | image_url: width: 800
+        | image_tag:
+          loading: 'lazy',
+          class: 'pce-card__image',
+          alt: product.featured_image.alt | default: product.title,
+          sizes: '(min-width: 1024px) 25vw, 50vw',
+          widths: '400, 600, 800'
+      }}
+    {%- else -%}
+      <div class="pce-card__image-placeholder">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {%- endif -%}
+
+    {%- if badge != nil -%}
+      <span class="lv-text-eyebrow pce-card__badge">{{ badge }}</span>
+    {%- endif -%}
+
+    <div class="pce-card__quick-add">
+      <span class="lv-text-eyebrow pce-card__quick-add-btn">
+        {{ 'products.product.add_to_cart' | t }}
+      </span>
+    </div>
+  </div>
+
+  <div class="pce-card__info">
+    <div class="pce-card__meta">
+      <p class="lv-text-eyebrow pce-card__category">{{ product.type }}</p>
+      <p class="pce-card__price">{{ product.price | money }}</p>
+    </div>
+    <h3 class="pce-card__title">{{ product.title }}</h3>
+    {%- if color_values.size > 0 -%}
+      <div class="pce-card__colors">
+        {%- for color in color_values -%}
+          <span class="pce-card__color">
+            {{- color -}}{%- unless forloop.last -%} ·{%- endunless -%}
+          </span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+</a>
