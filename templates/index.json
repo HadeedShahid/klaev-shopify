@@ -16,6 +16,13 @@
       "type": "marquee-banner",
       "settings": {}
     },
+    "products_editorial_main": {
+      "type": "products-editorial",
+      "settings": {
+        "collection": "leather-belts",
+        "products_to_show": 6
+      }
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -294,6 +301,7 @@
   "order": [
     "hero_editorial_main",
     "marquee_banner_main",
+    "products_editorial_main",
     "hero_jVaWmY",
     "product_list_fa6P9H"
   ]
