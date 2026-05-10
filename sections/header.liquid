@@ -1114,11 +1114,15 @@
     font-size: var(--menu-localization-font-size);
   }
 
-  /* ── Loveable: backdrop blur + border ── */
+  /* ── Loveable: backdrop blur + translucent bg ── */
   header-component {
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     --color-border: var(--lv-border);
+  }
+
+  .header__underlay-closed {
+    background: color-mix(in oklch, var(--lv-background) 85%, transparent);
   }
 
   /* ── Loveable: logo — Geist, wide tracking ── */
