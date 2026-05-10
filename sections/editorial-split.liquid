@@ -1,0 +1,199 @@
+<div class="editorial-split">
+
+  <div class="editorial-split__media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 1600
+        | image_tag:
+          loading: 'lazy',
+          class: 'editorial-split__image',
+          alt: section.settings.image.alt,
+          sizes: '(min-width: 1024px) 50vw, 100vw',
+          widths: '600, 900, 1200, 1600'
+      }}
+    {%- else -%}
+      <img
+        src="https://cdn.shopify.com/s/files/1/0624/0796/6791/files/editorial-1-BF6GcXrc.jpg?v=1778417158"
+        alt="{{ section.settings.image_alt | default: 'Editorial' }}"
+        class="editorial-split__image"
+        loading="lazy"
+      >
+    {%- endif -%}
+  </div>
+
+  <div class="editorial-split__content">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="lv-text-eyebrow editorial-split__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="lv-font-display editorial-split__heading">
+        {{ section.settings.heading | newline_to_br }}
+        {%- if section.settings.heading_italic != blank -%}
+          <span class="editorial-split__heading-italic">{{ section.settings.heading_italic }}</span>
+        {%- endif -%}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="editorial-split__subtext">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.link_label != blank -%}
+      <a
+        href="{{ section.settings.link_url | default: '#' }}"
+        class="lv-text-eyebrow editorial-split__link"
+      >
+        {{ section.settings.link_label }} →
+      </a>
+    {%- endif -%}
+  </div>
+
+</div>
+
+{% stylesheet %}
+  .editorial-split {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .editorial-split {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ── Image ── */
+  .editorial-split__image {
+    display: block;
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .editorial-split__image {
+      height: 80vh;
+    }
+  }
+
+  /* ── Content ── */
+  .editorial-split__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--lv-bone);
+    padding: 2.5rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .editorial-split__content {
+      padding: 5rem;
+    }
+  }
+
+  .editorial-split__eyebrow {
+    color: var(--lv-muted-foreground);
+    margin: 0;
+  }
+
+  .editorial-split__heading {
+    font-size: 2.25rem;
+    line-height: 0.95;
+    font-weight: 400;
+    margin: 1rem 0 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    .editorial-split__heading {
+      font-size: 3.75rem;
+    }
+  }
+
+  .editorial-split__heading-italic {
+    font-style: italic;
+    font-weight: 300;
+    display: block;
+  }
+
+  .editorial-split__subtext {
+    margin-top: 2rem;
+    max-width: 28rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: var(--lv-muted-foreground);
+  }
+
+  .editorial-split__link {
+    margin-top: 2.5rem;
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--lv-foreground);
+    padding-bottom: 0.25rem;
+    text-decoration: none;
+    color: var(--lv-foreground);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Editorial Split",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Editorial image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Chapter 02"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "On the\ndiscipline of"
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Heading italic line",
+      "default": "subtraction."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "We design backwards. Strip the silhouette until only what matters remains — the cut, the cloth, the colour. Nothing decorative survives."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read the manifesto"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Split"
+    }
+  ]
+}
+{% endschema %}

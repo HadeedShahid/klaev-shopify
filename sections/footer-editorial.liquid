@@ -1,0 +1,287 @@
+{% liquid
+  assign shop_menu    = linklists[section.settings.shop_menu]
+  assign company_menu = linklists[section.settings.company_menu]
+  assign help_menu    = linklists[section.settings.help_menu]
+%}
+
+<footer class="footer-editorial">
+
+  <div class="footer-editorial__main">
+
+    <div class="footer-editorial__brand">
+      <p class="lv-font-display footer-editorial__tagline">
+        {{ section.settings.tagline | default: 'Built for the\nlong now.' | newline_to_br }}
+      </p>
+
+      {%- form 'customer', id: 'FooterNewsletter' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="footer-editorial__form-success lv-text-eyebrow">You're subscribed.</p>
+        {%- else -%}
+          <div class="footer-editorial__form">
+            <input
+              type="email"
+              name="contact[email]"
+              placeholder="{{ section.settings.email_placeholder | default: 'Your email' }}"
+              class="footer-editorial__email-input"
+              autocomplete="email"
+              required
+            >
+            <button type="submit" class="lv-text-eyebrow footer-editorial__subscribe">
+              {{ section.settings.subscribe_label | default: 'Subscribe →' }}
+            </button>
+          </div>
+          {%- if form.errors -%}
+            <p class="footer-editorial__form-error lv-text-eyebrow">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
+    {%- if shop_menu != blank -%}
+      <div class="footer-editorial__col">
+        <h4 class="lv-text-eyebrow footer-editorial__col-title">{{ shop_menu.title }}</h4>
+        <ul class="footer-editorial__links">
+          {%- for link in shop_menu.links -%}
+            <li><a href="{{ link.url }}" class="footer-editorial__link lv-hover-underline">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if company_menu != blank -%}
+      <div class="footer-editorial__col">
+        <h4 class="lv-text-eyebrow footer-editorial__col-title">{{ company_menu.title }}</h4>
+        <ul class="footer-editorial__links">
+          {%- for link in company_menu.links -%}
+            <li><a href="{{ link.url }}" class="footer-editorial__link lv-hover-underline">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if help_menu != blank -%}
+      <div class="footer-editorial__col">
+        <h4 class="lv-text-eyebrow footer-editorial__col-title">{{ help_menu.title }}</h4>
+        <ul class="footer-editorial__links">
+          {%- for link in help_menu.links -%}
+            <li><a href="{{ link.url }}" class="footer-editorial__link lv-hover-underline">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+  </div>
+
+  <div class="footer-editorial__bottom">
+    <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+    <span>{{ section.settings.bottom_tagline | default: 'Made with intent.' }}</span>
+  </div>
+
+</footer>
+
+{% stylesheet %}
+  .footer-editorial {
+    background-color: var(--lv-ink);
+    color: var(--lv-background);
+  }
+
+  /* ── Main grid ── */
+  .footer-editorial__main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 3.5rem 1.5rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .footer-editorial__main {
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding: 5rem 2.5rem;
+    }
+  }
+
+  /* ── Brand ── */
+  .footer-editorial__brand {
+    grid-column: 1 / -1;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .footer-editorial__brand {
+      grid-column: 1;
+    }
+  }
+
+  .footer-editorial__tagline {
+    font-size: 2.25rem;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 12rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .footer-editorial__tagline {
+      font-size: 3.75rem;
+      max-width: 20rem;
+    }
+  }
+
+  /* ── Newsletter form ── */
+  .footer-editorial__form {
+    display: flex;
+    align-items: center;
+    max-width: 28rem;
+    margin-top: 2.5rem;
+    border-bottom: 1px solid rgb(250 249 246 / 0.4);
+  }
+
+  .footer-editorial__email-input {
+    flex: 1;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: var(--lv-background);
+    font-size: 0.875rem;
+    padding-block: 0.75rem;
+    /* prevent autofill from painting a background */
+    -webkit-box-shadow: 0 0 0 1000px var(--lv-ink) inset;
+    -webkit-text-fill-color: var(--lv-background);
+  }
+
+  .footer-editorial__email-input::placeholder {
+    color: rgb(250 249 246 / 0.5);
+  }
+
+  .footer-editorial__subscribe {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--lv-background);
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  .footer-editorial__form-success,
+  .footer-editorial__form-error {
+    margin-top: 0.75rem;
+  }
+
+  .footer-editorial__form-error {
+    color: rgb(250 249 246 / 0.6);
+  }
+
+  /* ── Nav columns ── */
+  .footer-editorial__col-title {
+    color: rgb(250 249 246 / 0.6);
+    margin: 0;
+  }
+
+  .footer-editorial__links {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-editorial__link {
+    font-size: 0.875rem;
+    color: var(--lv-background);
+    text-decoration: none;
+  }
+
+  /* override lv-hover-underline color for dark bg */
+  .footer-editorial__link {
+    background-image: linear-gradient(var(--lv-background), var(--lv-background));
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.4s ease;
+  }
+
+  .footer-editorial__link:hover {
+    background-size: 100% 1px;
+  }
+
+  /* ── Bottom bar ── */
+  .footer-editorial__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top: 1px solid rgb(250 249 246 / 0.15);
+    padding: 1.5rem;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(250 249 246 / 0.5);
+  }
+
+  @media screen and (min-width: 768px) {
+    .footer-editorial__bottom {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: 2.5rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer Editorial",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Built for the\nlong now."
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Your email"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_label",
+      "label": "Subscribe button label",
+      "default": "Subscribe →"
+    },
+    {
+      "type": "text",
+      "id": "bottom_tagline",
+      "label": "Bottom tagline",
+      "default": "Made with intent."
+    },
+    {
+      "type": "link_list",
+      "id": "shop_menu",
+      "label": "Shop menu"
+    },
+    {
+      "type": "link_list",
+      "id": "company_menu",
+      "label": "Company menu"
+    },
+    {
+      "type": "link_list",
+      "id": "help_menu",
+      "label": "Help menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer Editorial"
+    }
+  ]
+}
+{% endschema %}
