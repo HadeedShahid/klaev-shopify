@@ -84,12 +84,16 @@
     flex-direction: column;
     justify-content: center;
     background-color: var(--lv-bone);
-    padding: 2.5rem;
+    padding-block: 2.5rem;
+    padding-inline-start: 2.5rem;
+    padding-inline-end: max(1.5rem, calc((100vw - 90rem) / 2));
   }
 
   @media screen and (min-width: 1024px) {
     .editorial-split__content {
-      padding: 5rem;
+      padding-block: 5rem;
+      padding-inline-start: 5rem;
+      padding-inline-end: max(2.5rem, calc((100vw - 90rem) / 2));
     }
   }
 

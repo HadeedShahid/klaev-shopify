@@ -38,12 +38,14 @@
 
 {% stylesheet %}
   .categories-grid {
-    padding: 5rem 1.5rem 10rem;
+    padding-block: 5rem 10rem;
+    padding-inline: max(1.5rem, calc((100% - 90rem) / 2));
   }
 
   @media screen and (min-width: 1024px) {
     .categories-grid {
-      padding: 7rem 2.5rem 14rem;
+      padding-block: 7rem 14rem;
+      padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
     }
   }
 

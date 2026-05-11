@@ -80,10 +80,18 @@
   .facets-toggle {
     position: sticky;
     top: var(--header-group-height, 65px);
-    z-index: 40;
+    z-index: var(--layer-sticky, 8);
     background-color: color-mix(in oklch, var(--lv-background) 90%, transparent);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
+  }
+
+  /* Drop sticky bar below any open drawer/menu */
+  body:has(#filters-drawer[open]) .facets-block-wrapper--horizontal,
+  body:has(#filters-drawer[open]) .facets-toggle,
+  body:has(#Details-menu-drawer-container[open]) .facets-block-wrapper--horizontal,
+  body:has(#Details-menu-drawer-container[open]) .facets-toggle {
+    z-index: 0;
   }
 
   /* mobile: only .facets-toggle is visible, give it the border */
@@ -98,6 +106,8 @@
     }
     .facets-block-wrapper--horizontal {
       border-bottom: 1px solid var(--lv-border);
+      /* background spans full width; constrain content to match collection header */
+      padding-inline: max(var(--padding-lg, 1rem), calc((100% - 90rem) / 2));
     }
   }
 
@@ -162,11 +172,20 @@
     }
   }
 
-  /* ── Force 3-column grid on desktop ── */
+  /* ── Hide grid density on desktop ── */
+  /* 3-class specificity beats grid-density-controls.liquid's 2-class .facets .column-options-wrapper rule */
+  @media screen and (min-width: 750px) {
+    .facets-block-wrapper--horizontal .facets .column-options-wrapper {
+      display: none;
+    }
+  }
+
+  /* ── Force 4-column grid on desktop ── */
   /* 3-class specificity beats Horizon's scoped 2-class inline style block */
   .product-grid-container .product-grid:is(.product-grid--grid) {
-    --product-grid-columns-desktop: repeat(3, 1fr);
+    --product-grid-columns-desktop: repeat(4, 1fr);
   }
+
 
   /* ── Footer breathing room ── */
   .product-grid-container {

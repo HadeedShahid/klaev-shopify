@@ -103,14 +103,19 @@
     order: 2;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 1.5rem;
+    justify-content: center;
+    gap: 2rem;
+    padding-block: 1.5rem;
+    padding-inline-start: max(1.5rem, calc((100vw - 90rem) / 2));
+    padding-inline-end: 1.5rem;
   }
 
   @media screen and (min-width: 1024px) {
     .hero-editorial__content {
       order: 1;
-      padding: 3rem;
+      padding-block: 3rem;
+      padding-inline-start: max(2.5rem, calc((100vw - 90rem) / 2));
+      padding-inline-end: 3rem;
     }
   }
 

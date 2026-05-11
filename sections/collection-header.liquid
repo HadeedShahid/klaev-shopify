@@ -15,12 +15,14 @@
 {% stylesheet %}
   .collection-header {
     border-bottom: 1px solid var(--lv-border);
-    padding: 2rem 1.5rem;
+    padding-block: 2rem;
+    padding-inline: max(1.5rem, calc((100% - 90rem) / 2));
   }
 
   @media screen and (min-width: 1024px) {
     .collection-header {
-      padding: 4rem 2.5rem;
+      padding-block: 4rem;
+      padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
     }
   }
 
