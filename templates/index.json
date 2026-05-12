@@ -35,12 +35,23 @@
         "products_to_show": 6
       }
     },
+    "journal_editorial_main": {
+      "type": "journal-editorial",
+      "settings": {
+        "blog": "blog",
+        "articles_to_show": 3,
+        "eyebrow": "Journal / Field Notes",
+        "heading": "Words on the work.",
+        "view_all_label": "All articles"
+      }
+    }
   },
   "order": [
     "hero_editorial_main",
     "marquee_banner_main",
     "products_editorial_main",
     "editorial_split_main",
-    "categories_grid_main"
+    "categories_grid_main",
+    "journal_editorial_main"
   ]
 }
