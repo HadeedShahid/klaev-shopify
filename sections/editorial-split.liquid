@@ -40,9 +40,9 @@
       <p class="editorial-split__subtext">{{ section.settings.subtext }}</p>
     {%- endif -%}
 
-    {%- if section.settings.link_label != blank -%}
+    {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
       <a
-        href="{{ section.settings.link_url | default: '#' }}"
+        href="{{ section.settings.link_url }}"
         class="lv-text-eyebrow editorial-split__link"
       >
         {{ section.settings.link_label }} →
