@@ -40,9 +40,10 @@
       <p class="editorial-split__subtext">{{ section.settings.subtext }}</p>
     {%- endif -%}
 
-    {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
+    {%- if section.settings.link_label != blank -%}
+      {%- assign link_href = section.settings.link_url | default: '/collections/leather-belts' -%}
       <a
-        href="{{ section.settings.link_url }}"
+        href="{{ link_href }}"
         class="lv-text-eyebrow editorial-split__link"
       >
         {{ section.settings.link_label }} →
@@ -162,7 +163,7 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Chapter 02"
+      "default": "The Klaev way"
     },
     {
       "type": "textarea",
@@ -180,13 +181,13 @@
       "type": "textarea",
       "id": "subtext",
       "label": "Subtext",
-      "default": "We design backwards. Strip the silhouette until only what matters remains — the cut, the cloth, the colour. Nothing decorative survives."
+      "default": "Genuine leather does not wear out. It wears in. Every Klaev belt develops its own patina over time, shaped by the person wearing it."
     },
     {
       "type": "text",
       "id": "link_label",
       "label": "Link label",
-      "default": "Read the manifesto"
+      "default": "Shop leather belts"
     },
     {
       "type": "url",
