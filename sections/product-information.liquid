@@ -167,22 +167,6 @@
   </sticky-add-to-cart>
 {% endif %}
 
-{%- if product != blank -%}
-  <div class="pd-breadcrumb">
-    <div class="lv-text-eyebrow pd-breadcrumb__inner">
-      <a href="/" class="pd-breadcrumb__link">Index</a>
-      <span aria-hidden="true">›</span>
-      {%- if product.collections.first != blank -%}
-        <a href="{{ product.collections.first.url }}" class="pd-breadcrumb__link">{{ product.collections.first.title }}</a>
-      {%- else -%}
-        <a href="{{ routes.collections_url }}" class="pd-breadcrumb__link">Shop</a>
-      {%- endif -%}
-      <span aria-hidden="true">›</span>
-      <span>{{ product.title }}</span>
-    </div>
-  </div>
-{%- endif -%}
-
 {% render 'product-information-content',
   product_media_size: closest.product.media.size,
   section_id: section.id,
@@ -346,34 +330,12 @@
     }
   }
 
-  /* ── Breadcrumb ── */
-  .pd-breadcrumb {
-    border-bottom: 1px solid var(--lv-border);
-    padding-block: 0.875rem;
-    padding-inline: max(1.5rem, calc((100vw - 90rem) / 2));
-  }
-
-  @media screen and (min-width: 1024px) {
-    .pd-breadcrumb {
-      padding-inline: max(2.5rem, calc((100vw - 90rem) / 2));
-    }
-  }
-
-  .pd-breadcrumb__inner {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--lv-muted-foreground);
-  }
-
-  .pd-breadcrumb__link {
-    color: var(--lv-muted-foreground);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .pd-breadcrumb__link:hover {
-    color: var(--lv-foreground);
+  /* ── Strip Horizon's built-in gap padding on the details column ── */
+  .product-details {
+    padding-inline-start: 0 !important;
+    padding-left: 0 !important;
+    padding-inline-end: 0 !important;
+    padding-right: 0 !important;
   }
 
   /* ── Panel padding ── */
@@ -400,16 +362,22 @@
   /* ── Product type label ── */
   .pd-product-type {
     color: var(--lv-muted-foreground);
-    margin: 0 0 0.75rem;
+    margin: 0 0 -12px;
   }
 
-  /* ── Title ── */
+  /* ── Title — font-display text-4xl leading-[1] md:text-5xl ── */
   .product-details h1 {
-    font-family: var(--lv-font-display);
-    letter-spacing: var(--lv-tracking-tightest);
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1;
-    font-weight: 400;
+    font-family: var(--lv-font-display) !important;
+    letter-spacing: var(--lv-tracking-tightest) !important;
+    font-weight: 400 !important;
+    font-size: 2.25rem !important;
+    line-height: 1 !important;
+  }
+
+  @media screen and (min-width: 768px) {
+    .product-details h1 {
+      font-size: 3rem !important;
+    }
   }
 
   /* ── Price ── */
@@ -433,29 +401,28 @@
     --color-selected-variant-background: var(--lv-ink);
     --color-selected-variant-text: var(--lv-background);
     --options-border-radius: 0px;
-    margin-block-start: 2rem;
   }
 
-  .product-details .variant-option legend {
-    font-size: 11px;
-    letter-spacing: var(--lv-tracking-wider-fashion);
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--lv-foreground);
+  .product-details .variant-option {
+    font-size: 11px !important;
+    letter-spacing: var(--lv-tracking-wider-fashion) !important;
+    text-transform: uppercase !important;
+    font-weight: 500 !important;
+    color: var(--lv-foreground) !important;
   }
 
-  .product-details .variant-option__button-label {
-    font-size: 11px;
-    letter-spacing: var(--lv-tracking-wider-fashion);
-    text-transform: uppercase;
-    font-weight: 500;
-    border-radius: 0;
-    padding: 0.75rem 1rem;
+  .product-details .variant-option__button-label,
+  .product-details .variant-option__swatch-value {
+    font-size: 11px !important;
+    letter-spacing: var(--lv-tracking-wider-fashion) !important;
+    text-transform: uppercase !important;
+    font-weight: 500 !important;
+    border-radius: 0 !important;
+    padding: 0.75rem 1rem !important;
   }
 
   /* ── Buy buttons ── */
   .product-details .product-form-buttons {
-    margin-block-start: 2rem;
     gap: 0.75rem;
   }
 
@@ -480,6 +447,12 @@
   .product-details .add-to-cart-button:hover:not([disabled]) {
     background-color: oklch(from var(--lv-ink) l c h / 0.88);
     border-color: transparent;
+  }
+
+  /* ── Accelerated checkout (Buy it now) — square corners ── */
+  .product-details .shopify-payment-button__button,
+  .product-details .shopify-payment-button__button--unbranded {
+    border-radius: 0 !important;
   }
 
   /* ── Shipping info (text block after buy-buttons) ── */
