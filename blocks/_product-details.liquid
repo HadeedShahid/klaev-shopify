@@ -23,6 +23,9 @@
         {{- closest.product.title }}
       </a>
     </div>
+    {%- if closest.product.type != blank -%}
+      <p class="pd-product-type lv-text-eyebrow">{{ closest.product.type }}</p>
+    {%- endif -%}
     {% content_for 'blocks' %}
   {% endcapture %}
 
