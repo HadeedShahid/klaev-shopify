@@ -1,6 +1,10 @@
 
 
 {%- assign block_settings = block.settings -%}
+{%- assign sg_image_url = block_settings.size_guide_image | image_url: width: 1200 -%}
+{%- if sg_image_url == blank -%}
+  {%- assign sg_image_url = 'https://cdn.shopify.com/s/files/1/0624/0796/6791/files/Size_chart_men.png' -%}
+{%- endif -%}
 <div
   id="ProductInformation-{{ section.id }}"
   class="
@@ -27,9 +31,30 @@
       <p class="pd-product-type lv-text-eyebrow">{{ closest.product.type }}</p>
     {%- endif -%}
     {% content_for 'blocks' %}
+    <button class="sg-trigger lv-text-eyebrow" type="button" data-size-guide-trigger aria-haspopup="dialog">
+      Size guide
+    </button>
   {% endcapture %}
 
   {% render 'group', children: children, settings: block_settings, shopify_attributes: block.shopify_attributes %}
+
+  <div class="sg-modal" role="dialog" aria-modal="true" aria-label="Size guide" data-size-guide-modal>
+    <div class="sg-modal__backdrop" data-sg-backdrop></div>
+    <div class="sg-modal__panel">
+      <div class="sg-modal__header">
+        <span class="lv-text-eyebrow">Size guide</span>
+        <button class="sg-modal__close" type="button" data-sg-close aria-label="Close size guide">&#x2715;</button>
+      </div>
+      <div class="sg-modal__body">
+        <img
+          src="{{ sg_image_url }}"
+          alt="Size guide"
+          class="sg-modal__image"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </div>
 </div>
 
 {% stylesheet %}
@@ -66,7 +91,135 @@
       align-self: var(--details-position, 'flex-start');
     }
   }
+
+  /* ── Size guide trigger ── */
+  .sg-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--lv-muted-foreground);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    display: none;
+  }
+
+  .sg-trigger[data-ready] {
+    display: inline-block;
+    align-self: flex-start;
+  }
+
+  /* ── Size guide modal (right drawer) ── */
+  .sg-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .sg-modal[data-open] {
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .sg-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0);
+    transition: background 0.3s ease;
+  }
+
+  .sg-modal[data-open] .sg-modal__backdrop {
+    background: rgb(0 0 0 / 0.45);
+  }
+
+  .sg-modal__panel {
+    position: relative;
+    background: var(--lv-background, #fff);
+    width: min(520px, 100%);
+    max-height: 100dvh;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sg-modal[data-open] .sg-modal__panel {
+    transform: translateX(0);
+  }
+
+  .sg-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--lv-border, #e5e5e5);
+    position: sticky;
+    top: 0;
+    background: var(--lv-background, #fff);
+    z-index: 1;
+  }
+
+  .sg-modal__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    color: var(--lv-foreground, #1c1a18);
+    font-size: 0.875rem;
+    line-height: 1;
+    transition: opacity 0.15s;
+  }
+
+  .sg-modal__close:hover {
+    opacity: 0.6;
+  }
+
+  .sg-modal__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 {% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.querySelector('[data-size-guide-trigger]');
+    const modal = document.querySelector('[data-size-guide-modal]');
+    if (!trigger || !modal) return;
+
+    // Move trigger to appear right after the variant picker
+    const variantPicker = document.querySelector('.variant-picker');
+    if (variantPicker) {
+      variantPicker.after(trigger);
+    }
+    trigger.setAttribute('data-ready', '');
+
+    const open = () => {
+      modal.setAttribute('data-open', '');
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('[data-sg-close]').focus();
+    };
+
+    const close = () => {
+      modal.removeAttribute('data-open');
+      document.body.style.overflow = '';
+      trigger.focus();
+    };
+
+    trigger.addEventListener('click', open);
+    modal.querySelector('[data-sg-backdrop]').addEventListener('click', close);
+    modal.querySelector('[data-sg-close]').addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.hasAttribute('data-open')) close();
+    });
+  });
+{% endjavascript %}
 
 {% schema %}
 {
@@ -135,6 +288,15 @@
   ],
   "tag": null,
   "settings": [
+    {
+      "type": "header",
+      "content": "Size guide"
+    },
+    {
+      "type": "image_picker",
+      "id": "size_guide_image",
+      "label": "Size guide image"
+    },
     {
       "type": "header",
       "content": "t:content.size"
