@@ -192,10 +192,16 @@
     const modal = document.querySelector('[data-size-guide-modal]');
     if (!trigger || !modal) return;
 
-    // Move trigger to appear right after the variant picker
+    // Move modal to body so no stacking context from carousel or sections can overlap it
+    document.body.appendChild(modal);
+
+    // Move trigger after variant picker, or before buy buttons if no picker exists
     const variantPicker = document.querySelector('.variant-picker');
+    const buyButtons = document.querySelector('.buy-buttons-block');
     if (variantPicker) {
       variantPicker.after(trigger);
+    } else if (buyButtons) {
+      buyButtons.before(trigger);
     }
     trigger.setAttribute('data-ready', '');
 
