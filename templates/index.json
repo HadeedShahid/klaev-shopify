@@ -23,6 +23,8 @@
     "categories_grid_main": {
       "type": "categories-grid",
       "settings": {
+        "eyebrow": "Shop / Collections",
+        "heading": "The full edit.",
         "collection_1": "leather-jackets",
         "collection_2": "suede-jackets",
         "collection_3": "leather-belts"
