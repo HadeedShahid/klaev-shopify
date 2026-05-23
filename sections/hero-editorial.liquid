@@ -62,7 +62,14 @@
 
     {%- comment -%} ── Image column ── {%- endcomment -%}
     <div class="hero-editorial__media">
+      {%- assign hero_default_alt = 'Klaev premium leather jackets and belts in Pakistan' -%}
       {%- if section.settings.image != blank -%}
+        {%- assign hero_alt = section.settings.image.alt | default: hero_default_alt -%}
+        {%- comment -%} Override generic file alts that don't help SEO {%- endcomment -%}
+        {%- assign hero_alt_lower = hero_alt | downcase | strip -%}
+        {%- if hero_alt_lower == 'hero' or hero_alt_lower == 'image' or hero_alt_lower == 'photo' or hero_alt_lower == 'untitled' or hero_alt_lower == 'img' or hero_alt_lower == 'picture' -%}
+          {%- assign hero_alt = hero_default_alt -%}
+        {%- endif -%}
         {{
           section.settings.image
           | image_url: width: 1600
@@ -70,14 +77,14 @@
             loading: 'eager',
             fetchpriority: 'high',
             class: 'hero-editorial__image',
-            alt: section.settings.image.alt,
+            alt: hero_alt,
             sizes: '(min-width: 1024px) 58vw, 100vw',
             widths: '600, 900, 1200, 1600'
         }}
       {%- else -%}
         <img
           src="https://cdn.shopify.com/s/files/1/0624/0796/6791/files/hero-image_4f0b3d7a-2bdb-46cc-9ac7-b0a7abab61b1.webp?v=1779003295"
-          alt="Hero"
+          alt="{{ hero_default_alt }}"
           class="hero-editorial__image"
           loading="eager"
           fetchpriority="high"

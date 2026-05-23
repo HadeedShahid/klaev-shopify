@@ -286,13 +286,13 @@
 
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
-    "url": {{ request.origin | append: page.url | json }}
+    "url": {{ shop.url | append: '/' | json }}
   }
 </script>
 
@@ -330,7 +330,11 @@
     class="header__underlay header__underlay-open"
   ></div>
   {%- if request.page_type == 'index' -%}
-    <h1 class="visually-hidden">{{ shop.name }}</h1>
+    {%- comment -%}
+      Visually-hidden H1 on the homepage. Gives screen-reader users a clear page identifier
+      and gives Google a keyword-rich brand H1 that complements the visible hero heading.
+    {%- endcomment -%}
+    <h1 class="visually-hidden">Klaev. Premium leather jackets and belts in Pakistan.</h1>
   {%- endif -%}
   {% for row in rows %}
     {% liquid
