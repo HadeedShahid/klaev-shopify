@@ -46,6 +46,64 @@
         "heading": "Words on the work.",
         "view_all_label": "All articles"
       }
+    },
+    "faq_main": {
+      "type": "faq",
+      "settings": {
+        "heading": "Frequently asked questions"
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How do I know my Klaev jacket is real, full-grain leather?",
+            "answer": "<p>Every Klaev jacket is cut from full-grain lambskin or goatskin suede, the highest tier of real leather available. When your jacket arrives, three quick checks confirm it. Real leather smells earthy and organic, not chemical or sweet. The grain is naturally uneven, with small variations and pores visible. A drop of water absorbs slowly instead of beading off, and the cut edges show fibrous strands. If anything ever fails these checks, return the piece. No questions asked.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "What's the difference between lambskin and goatskin suede jackets?",
+            "answer": "<p>Lambskin is softer and lighter; goatskin suede has a velvety hand-feel with more visible character. Lambskin works for everyday wear and ages into a personal patina. It is supple from day one and pairs well with both tailored and casual outfits. Goatskin suede is matte and tactile, with a refined finish that reads as quiet luxury. Pick lambskin if you want a classic leather jacket; pick goatskin suede if you want something softer and more distinct.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How should a Klaev leather jacket fit me?",
+            "answer": "<p>A Klaev jacket should sit close at the shoulders, with the seam ending where your shoulder meets your arm. The chest should feel snug but not restrictive; you should be able to close it comfortably over a t-shirt or light knit. Sleeves end at the wrist bone. Hem sits at the top of the thigh. Klaev follows standard international sizing. If you sit between sizes, size up if you plan to layer underneath.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How do I measure for the right Klaev belt size?",
+            "answer": "<p>For the right Klaev belt, add two inches to your trouser waist size. If you wear 32-inch trousers, order a 34-inch belt; this matches the middle hole on a standard 35mm Klaev belt. To check an existing belt, measure from the buckle fold to the hole you use most often. If you sit between sizes, size up. Each Klaev belt has multiple holes, so a small adjustment is always possible.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for my Klaev jacket in Pakistani weather?",
+            "answer": "<p>Klaev leather needs three things: airflow, conditioning every six months, and protection from direct heat or rain. In Pakistani summers, store your jacket in a breathable cotton bag with a silica gel sachet to keep humidity from causing mildew. Never seal it in plastic. If it gets wet, hang it to dry at room temperature; never use a hairdryer or direct sunlight. Condition with a quality leather balm twice a year, more often in dry winters. With basic care, full-grain leather lasts decades.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Why is Klaev made in Lahore?",
+            "answer": "<p>Pakistan is one of the world's largest leather producers, processing 13 million hides and 47 million skins annually, supplying many international luxury brands. Klaev sources directly from those same tanneries in Lahore and works with a small team of master craftsmen, not a mass-production factory. We make in small batches, hand-finish every seam, and skip the middlemen. The result is the same leather quality you find on European boutique racks at a fraction of the price, made with full transparency about origin.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer Cash on Delivery? Can I inspect before paying?",
+            "answer": "<p>Yes, Klaev offers Cash on Delivery across Pakistan, and yes, you can inspect your order before paying. Our courier will hand you the sealed box; open it, check the leather, try the fit, and only then hand over payment. If anything is wrong, return the package at the door at no cost to you. You can also visit our Block M, Gulberg 3 store in Lahore to see the collection in person.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7"]
     }
   },
   "order": [
@@ -54,6 +112,7 @@
     "products_editorial_main",
     "editorial_split_main",
     "categories_grid_main",
-    "journal_editorial_main"
+    "journal_editorial_main",
+    "faq_main"
   ]
 }
