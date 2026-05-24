@@ -1,0 +1,293 @@
+{% doc %}
+  Klaev FAQ section.
+
+  - Renders a centered accordion of question blocks using native <details>/<summary>
+    for accessibility and zero-JS reliability.
+  - Pakistan-targeted answers for SEO (full-grain leather authenticity, lambskin vs
+    goatskin, sizing, belt sizing, climate care, Lahore-made positioning, COD trust).
+  - Outputs FAQPage JSON-LD when at least one question block is present. Google fully
+    deprecated FAQ rich snippets on 2026-05-07, but the schema is still consumed by
+    Google AI Overviews, Perplexity, and ChatGPT search and is documented to improve
+    citation rates roughly 30 to 36 percent for pages that also rank organically.
+{% enddoc %}
+
+<section class="faq" aria-labelledby="faq-heading">
+  <div class="faq__inner">
+    {%- if section.settings.heading != blank -%}
+      <header class="faq__header">
+        <h2 id="faq-heading" class="lv-font-display faq__heading">{{ section.settings.heading }}</h2>
+      </header>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="faq__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'question' -%}
+            <details class="faq__item" {{ block.shopify_attributes }}>
+              <summary class="faq__summary">
+                <span class="faq__question">{{ block.settings.question }}</span>
+                <span class="faq__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round">
+                    <line x1="7" y1="2" x2="7" y2="12" />
+                    <line x1="2" y1="7" x2="12" y2="7" />
+                  </svg>
+                </span>
+              </summary>
+              <div class="faq__answer">{{ block.settings.answer }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- assign question_blocks = section.blocks | where: 'type', 'question' -%}
+  {%- if question_blocks.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for block in question_blocks -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.answer | strip_html | strip | json }}
+              }
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .faq {
+    padding-block: 0 5rem;
+    padding-inline: max(1.5rem, calc((100% - 90rem) / 2));
+    background-color: var(--lv-background);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .faq {
+      padding-block: 0 7rem;
+    }
+  }
+
+  .faq__inner {
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  .faq__header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .faq__header {
+      margin-bottom: 3.5rem;
+    }
+  }
+
+  .faq__heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0;
+    color: var(--lv-foreground);
+  }
+
+  .faq__list {
+    border-top: 1px solid var(--lv-border);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--lv-border);
+  }
+
+  .faq__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--lv-foreground);
+    transition: color 0.2s ease;
+    user-select: none;
+  }
+
+  @media screen and (min-width: 768px) {
+    .faq__summary {
+      padding-block: 1.75rem;
+      font-size: 1.0625rem;
+    }
+  }
+
+  .faq__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__summary::marker {
+    display: none;
+    content: '';
+  }
+
+  .faq__summary:hover {
+    color: var(--lv-ink);
+  }
+
+  .faq__summary:focus-visible {
+    outline: 2px solid var(--lv-ink);
+    outline-offset: 4px;
+  }
+
+  .faq__question {
+    flex: 1 1 auto;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  .faq__icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--lv-muted-foreground);
+    transition: transform 0.3s ease, color 0.2s ease;
+  }
+
+  details[open] .faq__icon {
+    transform: rotate(45deg);
+    color: var(--lv-ink);
+  }
+
+  details[open] > .faq__summary {
+    color: var(--lv-ink);
+  }
+
+  .faq__answer {
+    padding-block: 0 1.5rem;
+    padding-inline-end: 3rem;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--lv-muted-foreground);
+    max-width: 48rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .faq__answer {
+      padding-block: 0 1.75rem;
+      font-size: 1rem;
+    }
+  }
+
+  .faq__answer p {
+    margin: 0;
+  }
+
+  .faq__answer p + p {
+    margin-top: 0.75rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently asked questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "limit": 25,
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Your question goes here"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>The answer goes here. Keep it to 60 to 90 words and put the direct answer in the first sentence so AI search systems extract it cleanly.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "How do I know my Klaev jacket is real, full-grain leather?",
+            "answer": "<p>Every Klaev jacket is cut from full-grain lambskin or goatskin suede, the highest tier of real leather available. When your jacket arrives, three quick checks confirm it. Real leather smells earthy and organic, not chemical or sweet. The grain is naturally uneven, with small variations and pores visible. A drop of water absorbs slowly instead of beading off, and the cut edges show fibrous strands. If anything ever fails these checks, return the piece. No questions asked.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What's the difference between lambskin and goatskin suede jackets?",
+            "answer": "<p>Lambskin is softer and lighter; goatskin suede has a velvety hand-feel with more visible character. Lambskin works for everyday wear and ages into a personal patina. It is supple from day one and pairs well with both tailored and casual outfits. Goatskin suede is matte and tactile, with a refined finish that reads as quiet luxury. Pick lambskin if you want a classic leather jacket; pick goatskin suede if you want something softer and more distinct.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How should a Klaev leather jacket fit me?",
+            "answer": "<p>A Klaev jacket should sit close at the shoulders, with the seam ending where your shoulder meets your arm. The chest should feel snug but not restrictive; you should be able to close it comfortably over a t-shirt or light knit. Sleeves end at the wrist bone. Hem sits at the top of the thigh. Klaev follows standard international sizing. If you sit between sizes, size up if you plan to layer underneath.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How do I measure for the right Klaev belt size?",
+            "answer": "<p>For the right Klaev belt, add two inches to your trouser waist size. If you wear 32-inch trousers, order a 34-inch belt; this matches the middle hole on a standard 35mm Klaev belt. To check an existing belt, measure from the buckle fold to the hole you use most often. If you sit between sizes, size up. Each Klaev belt has multiple holes, so a small adjustment is always possible.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for my Klaev jacket in Pakistani weather?",
+            "answer": "<p>Klaev leather needs three things: airflow, conditioning every six months, and protection from direct heat or rain. In Pakistani summers, store your jacket in a breathable cotton bag with a silica gel sachet to keep humidity from causing mildew. Never seal it in plastic. If it gets wet, hang it to dry at room temperature; never use a hairdryer or direct sunlight. Condition with a quality leather balm twice a year, more often in dry winters. With basic care, full-grain leather lasts decades.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Why is Klaev made in Lahore?",
+            "answer": "<p>Pakistan is one of the world's largest leather producers, processing 13 million hides and 47 million skins annually, supplying many international luxury brands. Klaev sources directly from those same tanneries in Lahore and works with a small team of master craftsmen, not a mass-production factory. We make in small batches, hand-finish every seam, and skip the middlemen. The result is the same leather quality you find on European boutique racks at a fraction of the price, made with full transparency about origin.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer Cash on Delivery? Can I inspect before paying?",
+            "answer": "<p>Yes, Klaev offers Cash on Delivery across Pakistan, and yes, you can inspect your order before paying. Our courier will hand you the sealed box; open it, check the leather, try the fit, and only then hand over payment. If anything is wrong, return the package at the door at no cost to you. You can also visit our Block M, Gulberg 3 store in Lahore to see the collection in person.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
