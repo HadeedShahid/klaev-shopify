@@ -289,9 +289,12 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
-    {% if settings.logo %}
-      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-    {% endif %}
+    "logo": {% if settings.logo %}{{ settings.logo | image_url: width: 500 | prepend: "https:" | json }}{% else %}"https://cdn.shopify.com/s/files/1/0624/0796/6791/files/logo_2_5_5aae7543-8b88-4732-acde-0aba4c471b11.png?v=1763914182"{% endif %},
+    "sameAs": [
+      "https://www.instagram.com/getklaev/",
+      "https://www.facebook.com/profile.php?id=61575756869911",
+      "https://www.tiktok.com/@getklaev"
+    ],
     "url": {{ shop.url | append: '/' | json }}
   }
 </script>

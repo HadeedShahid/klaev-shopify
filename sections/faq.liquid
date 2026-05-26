@@ -11,35 +11,40 @@
     citation rates roughly 30 to 36 percent for pages that also rank organically.
 {% endcomment %}
 
-<section class="faq" aria-labelledby="faq-heading">
-  <div class="faq__inner">
-    {%- if section.settings.heading != blank -%}
-      <header class="faq__header">
-        <h2 id="faq-heading" class="lv-font-display faq__heading">{{ section.settings.heading }}</h2>
-      </header>
-    {%- endif -%}
-
-    {%- if section.blocks.size > 0 -%}
-      <div class="faq__list">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'question' -%}
-            <details class="faq__item" {{ block.shopify_attributes }}>
-              <summary class="faq__summary">
-                <span class="faq__question">{{ block.settings.question }}</span>
-                <span class="faq__icon" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round">
-                    <line x1="7" y1="2" x2="7" y2="12" />
-                    <line x1="2" y1="7" x2="12" y2="7" />
-                  </svg>
-                </span>
-              </summary>
-              <div class="faq__answer">{{ block.settings.answer }}</div>
-            </details>
-          {%- endif -%}
-        {%- endfor -%}
+<section class="faq"{% if section.settings.heading != blank %} aria-labelledby="faq-heading"{% endif %}>
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+    <div class="faq__header">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="lv-text-eyebrow faq__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 id="faq-heading" class="lv-font-display faq__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
       </div>
-    {%- endif -%}
-  </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="faq__list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'question' -%}
+          <details class="faq__item" {{ block.shopify_attributes }}>
+            <summary class="faq__summary">
+              <span class="faq__question">{{ block.settings.question }}</span>
+              <span class="faq__icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round">
+                  <line x1="7" y1="2" x2="7" y2="12" />
+                  <line x1="2" y1="7" x2="12" y2="7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="faq__answer">{{ block.settings.answer }}</div>
+          </details>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 
   {%- assign question_blocks = section.blocks | where: 'type', 'question' -%}
   {%- if question_blocks.size > 0 -%}
@@ -66,47 +71,80 @@
 
 {% stylesheet %}
   .faq {
-    padding-block: 0 5rem;
+    padding-block: 4rem;
     padding-inline: max(1.5rem, calc((100% - 90rem) / 2));
     background-color: var(--lv-background);
   }
 
   @media screen and (min-width: 1024px) {
     .faq {
-      padding-block: 0 7rem;
+      padding-block: 4rem;
+      padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
     }
   }
 
-  .faq__inner {
-    max-width: 56rem;
-    margin: 0 auto;
-  }
-
+  /* ── Header ── */
   .faq__header {
     margin-bottom: 2.5rem;
-    text-align: center;
   }
 
-  @media screen and (min-width: 1024px) {
-    .faq__header {
-      margin-bottom: 3.5rem;
-    }
+  .faq__eyebrow {
+    color: var(--lv-muted-foreground);
+    margin: 0;
   }
 
   .faq__heading {
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-    line-height: 1.1;
+    font-size: 2.25rem;
+    margin: 0.75rem 0 0;
     font-weight: 400;
-    margin: 0;
+    line-height: 1;
     color: var(--lv-foreground);
   }
 
+  @media screen and (min-width: 768px) {
+    .faq__heading {
+      font-size: 3rem;
+    }
+  }
+
   .faq__list {
-    border-top: 1px solid var(--lv-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .faq__list {
+      gap: 1rem;
+    }
   }
 
   .faq__item {
-    border-bottom: 1px solid var(--lv-border);
+    border: 1px solid var(--lv-border);
+    border-radius: 4px;
+    background-color: var(--lv-background);
+    transition: border-color 0.2s ease;
+  }
+
+  .faq__item:hover {
+    border-color: var(--lv-ink);
+  }
+
+  details[open].faq__item {
+    border-color: var(--lv-ink);
+  }
+
+  /* Answer is wrapped at runtime by JS in a .faq__answer-wrap div
+     that handles the slide animation. CSS below controls the wrap. */
+  .faq__answer-wrap {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: height;
+  }
+
+  details[open] .faq__answer-wrap {
+    /* JS sets explicit height during animation; resets to auto after */
   }
 
   .faq__summary {
@@ -114,7 +152,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    padding-block: 1.5rem;
+    padding: 1.25rem 1.25rem;
     cursor: pointer;
     list-style: none;
     font-size: 1rem;
@@ -126,7 +164,7 @@
 
   @media screen and (min-width: 768px) {
     .faq__summary {
-      padding-block: 1.75rem;
+      padding: 1.5rem 1.75rem;
       font-size: 1.0625rem;
     }
   }
@@ -163,7 +201,7 @@
     width: 1.5rem;
     height: 1.5rem;
     color: var(--lv-muted-foreground);
-    transition: transform 0.3s ease, color 0.2s ease;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
   }
 
   details[open] .faq__icon {
@@ -176,17 +214,15 @@
   }
 
   .faq__answer {
-    padding-block: 0 1.5rem;
-    padding-inline-end: 3rem;
+    padding: 0 1.25rem 1.25rem;
     font-size: 0.9375rem;
     line-height: 1.7;
     color: var(--lv-muted-foreground);
-    max-width: 48rem;
   }
 
   @media screen and (min-width: 768px) {
     .faq__answer {
-      padding-block: 0 1.75rem;
+      padding: 0 1.75rem 1.5rem;
       font-size: 1rem;
     }
   }
@@ -198,13 +234,93 @@
   .faq__answer p + p {
     margin-top: 0.75rem;
   }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .faq__item,
+    .faq__answer-wrap,
+    .faq__icon {
+      transition: none;
+    }
+  }
 {% endstylesheet %}
+
+<script>
+  (function () {
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var DURATION = prefersReducedMotion ? 0 : 350;
+
+    document.querySelectorAll('.faq__item').forEach(function (item) {
+      if (item.dataset.faqInit === 'true') return;
+      item.dataset.faqInit = 'true';
+
+      var summary = item.querySelector('.faq__summary');
+      var answer = item.querySelector('.faq__answer');
+      if (!summary || !answer) return;
+
+      // Wrap the answer in an animation container so we can transition height
+      // without fighting the native details > * hiding behavior.
+      var wrap = document.createElement('div');
+      wrap.className = 'faq__answer-wrap';
+      answer.parentNode.insertBefore(wrap, answer);
+      wrap.appendChild(answer);
+
+      // Initial state: closed wraps have height 0; open wraps are auto.
+      if (item.open) {
+        wrap.style.height = 'auto';
+      }
+
+      var animating = false;
+
+      summary.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (animating) return;
+        animating = true;
+
+        if (item.open) {
+          // Closing: from current height down to 0
+          var startHeight = wrap.scrollHeight;
+          wrap.style.height = startHeight + 'px';
+          // Force reflow so the explicit height is committed before transition
+          void wrap.offsetHeight;
+          wrap.style.height = '0px';
+
+          window.setTimeout(function () {
+            item.open = false;
+            animating = false;
+          }, DURATION);
+        } else {
+          // Opening: open the element so content reflows to its natural size,
+          // then animate from 0 to that measured height.
+          item.open = true;
+          var targetHeight = wrap.scrollHeight;
+          wrap.style.height = '0px';
+          void wrap.offsetHeight;
+          wrap.style.height = targetHeight + 'px';
+
+          window.setTimeout(function () {
+            // After opening, drop the inline height so the answer can
+            // reflow naturally if its content changes (e.g., responsive resize).
+            wrap.style.height = 'auto';
+            animating = false;
+          }, DURATION);
+        }
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
   "name": "FAQ",
   "tag": "div",
   "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Help / Common questions"
+    },
     {
       "type": "text",
       "id": "heading",

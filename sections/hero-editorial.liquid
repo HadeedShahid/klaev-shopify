@@ -11,12 +11,12 @@
       </div>
 
       <div class="hero-editorial__body">
-        <h1 class="hero-editorial__heading lv-font-display">
+        <h2 class="hero-editorial__heading lv-font-display">
           {{ section.settings.heading | newline_to_br }}
-          {%- if section.settings.heading_italic != blank -%}
+          {% if section.settings.heading_italic != blank %}
             <span class="hero-editorial__heading-italic">{{ section.settings.heading_italic }}</span>
-          {%- endif -%}
-        </h1>
+          {% endif %}
+        </h2>
 
         {%- if section.settings.subtext != blank -%}
           <p class="hero-editorial__subtext">{{ section.settings.subtext }}</p>
