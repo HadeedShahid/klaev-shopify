@@ -1,0 +1,111 @@
+{% comment %}
+  Renders the collection's description (body_html) as editorial copy below the
+  product grid. Horizon does not render collection.description anywhere by default,
+  so this section surfaces it for on-page SEO and shopper context.
+
+  Content is managed per-collection via the collection Description field
+  (collection.body_html), so each collection shows its own unique copy.
+{% endcomment %}
+
+{%- if collection.description != blank -%}
+  <section class="collection-editorial">
+    <div class="collection-editorial__inner rte">
+      {{ collection.description }}
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .collection-editorial {
+    padding-block: 0 4rem;
+    padding-inline: max(1.5rem, calc((100% - 90rem) / 2));
+    background-color: var(--lv-background);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .collection-editorial {
+      padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
+    }
+  }
+
+  .collection-editorial__inner {
+    max-width: 60rem;
+    color: var(--lv-muted-foreground);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+
+  @media screen and (min-width: 768px) {
+    .collection-editorial__inner {
+      font-size: 1rem;
+    }
+  }
+
+  .collection-editorial__inner h2 {
+    font-family: var(--lv-font-display);
+    font-size: 1.75rem;
+    line-height: 1.15;
+    font-weight: 400;
+    color: var(--lv-foreground);
+    margin: 3rem 0 1rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .collection-editorial__inner h2 {
+      font-size: 2.25rem;
+    }
+  }
+
+  .collection-editorial__inner h2:first-child {
+    margin-top: 0;
+  }
+
+  .collection-editorial__inner h3 {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--lv-foreground);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .collection-editorial__inner p {
+    margin: 0 0 1rem;
+  }
+
+  .collection-editorial__inner p:last-child {
+    margin-bottom: 0;
+  }
+
+  .collection-editorial__inner ul,
+  .collection-editorial__inner ol {
+    margin: 0 0 1rem;
+    padding-inline-start: 1.25rem;
+  }
+
+  .collection-editorial__inner li {
+    margin-bottom: 0.5rem;
+  }
+
+  .collection-editorial__inner a {
+    color: var(--lv-foreground);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .collection-editorial__inner strong {
+    color: var(--lv-foreground);
+    font-weight: 500;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection editorial",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Collection editorial"
+    }
+  ]
+}
+{% endschema %}

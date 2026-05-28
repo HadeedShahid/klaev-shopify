@@ -12,6 +12,10 @@
       "type": "collection-header",
       "settings": {}
     },
+    "collection_editorial": {
+      "type": "collection-editorial",
+      "settings": {}
+    },
     "faq_collection": {
       "type": "faq",
       "settings": {
@@ -195,6 +199,7 @@
   "order": [
     "collection_header_main",
     "main",
-    "faq_collection"
+    "faq_collection",
+    "collection_editorial"
   ]
 }
