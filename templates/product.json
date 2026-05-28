@@ -264,6 +264,57 @@
         "padding-block-end": 0
       }
     },
+    "faq_product": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "Help / Buying Klaev",
+        "heading": "Common questions about this piece"
+      },
+      "blocks": {
+        "q_size": {
+          "type": "question",
+          "settings": {
+            "question": "What size should I order in this product?",
+            "answer": "<p>Klaev jackets follow standard international sizing: M fits chest 38 to 40 inches, L fits 40 to 42, XL fits 42 to 44. If you sit between sizes, size up to layer comfortably. Klaev belts use standard international sizing too: add 2 inches to your trouser waist (a 32-inch trouser pairs with a 34-inch belt). Each belt has multiple holes so small adjustments are easy. Full measurements on our <a href=\"/pages/jackets-size-chart\">Size Chart</a> page.</p>"
+          }
+        },
+        "q_authenticity": {
+          "type": "question",
+          "settings": {
+            "question": "How is this different from the \"genuine leather\" I see at other Pakistani shops?",
+            "answer": "<p>Most belts in the Pakistani market labelled \"genuine leather\" are actually bonded scraps glued together. They crack and peel within months. Klaev uses only full-grain lambskin, goatskin suede, or single-piece cow leather depending on the piece. This is the highest tier of real leather: cut from one solid sheet, not bonded. The grain ages, develops patina, and lasts decades.</p>"
+          }
+        },
+        "q_care": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for this in Pakistani weather?",
+            "answer": "<p>Klaev leather needs three things: airflow, conditioning twice a year, and protection from direct heat or rain. In Pakistani summers, store the piece in a breathable cotton bag with a silica gel sachet to keep humidity from causing mildew. Never seal in plastic. If it gets wet, hang to dry at room temperature. Never use a hairdryer or direct sun. With basic care, full-grain leather lasts decades.</p>"
+          }
+        },
+        "q_cod": {
+          "type": "question",
+          "settings": {
+            "question": "Can I pay Cash on Delivery and inspect before paying?",
+            "answer": "<p>Yes. Klaev offers Cash on Delivery across Pakistan and you can inspect your order before paying. Our courier hands you the sealed box. Open it, check the leather, try the fit. Only then hand over payment. If anything is wrong, return the package at the door at no cost to you. Major Pakistani cities receive orders in 2 to 3 days; smaller cities in 3 to 5.</p>"
+          }
+        },
+        "q_return": {
+          "type": "question",
+          "settings": {
+            "question": "What if it does not fit or I want to exchange it?",
+            "answer": "<p>If anything is wrong with your order, return it at the door during COD inspection at no cost. For exchanges after delivery, message us within 7 days on Instagram (@getklaev) or email business.klaev@gmail.com with your order number. Defective pieces get a full refund, no questions asked. Sizing exchanges are easy when the piece is unworn with tags intact.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_size",
+        "q_authenticity",
+        "q_care",
+        "q_cod",
+        "q_return"
+      ]
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -408,6 +459,7 @@
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq"
+    "product_recommendations_qggXJq",
+    "faq_product"
   ]
 }

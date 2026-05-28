@@ -12,6 +12,57 @@
       "type": "collection-header",
       "settings": {}
     },
+    "faq_collection": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "Help / Choosing Klaev",
+        "heading": "Questions before you buy"
+      },
+      "blocks": {
+        "q_choose": {
+          "type": "question",
+          "settings": {
+            "question": "Which Klaev leather is right for my style?",
+            "answer": "<p>Klaev offers three leathers. Lambskin: soft, supple, lightweight, ages into personal patina. Best for daily wear and tailoring. Goatskin suede: matte, velvety, quietly luxurious. Best for a softer statement or layered looks. Single-piece full-grain cow leather: structural, dense, ages slowly. Used in our belts because it survives 20 plus years of daily flexing. Pick based on weight, finish, and how long you want the piece to last.</p>"
+          }
+        },
+        "q_sizing": {
+          "type": "question",
+          "settings": {
+            "question": "How do I find my fit or size?",
+            "answer": "<p>Klaev follows standard international sizing. For jackets, measure your chest at the fullest point and check our chart: M is 38 to 40 inches, L is 40 to 42, XL is 42 to 44. If you sit between sizes, go up if layering. For belts, add 2 inches to your trouser waist (a 34-inch belt for 32-inch trousers). Multiple holes mean small adjustments are always possible. Full Size Chart at <a href=\"/pages/jackets-size-chart\">/pages/jackets-size-chart</a>.</p>"
+          }
+        },
+        "q_price": {
+          "type": "question",
+          "settings": {
+            "question": "How does Klaev price compare to other Pakistani leather brands?",
+            "answer": "<p>Klaev jackets start at Rs. 13,999 and belts at Rs. 2,500. We work directly with Lahore tanneries and skip the middlemen, showroom rent, and import markups. The same full-grain lambskin at heritage Pakistani brands runs Rs. 25,000 to Rs. 80,000 plus. You pay for the leather and the craftsmanship, not the supply chain. Same materials many international luxury houses use.</p>"
+          }
+        },
+        "q_origin": {
+          "type": "question",
+          "settings": {
+            "question": "Where is Klaev made and how do I verify quality?",
+            "answer": "<p>Klaev is designed, cut, and finished in Lahore by a small team of master leather craftsmen. We source directly from local tanneries that also supply many international luxury brands. Every order ships with a transparent leather provenance note. If anything fails our quality promise, return it for a full refund. No questions asked. You can also visit our Block M, Gulberg 3 store in Lahore to inspect the collection in person.</p>"
+          }
+        },
+        "q_delivery": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship across Pakistan with Cash on Delivery?",
+            "answer": "<p>Yes. Klaev ships across Pakistan with Cash on Delivery. Karachi, Lahore, Islamabad, and Rawalpindi typically receive orders in 2 to 3 days. Smaller cities take 3 to 5. You open the box and inspect the leather before paying the courier. If anything is wrong, return at the door. You can also visit our store in Block M, Gulberg 3 Lahore to see the full collection in person.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_choose",
+        "q_sizing",
+        "q_price",
+        "q_origin",
+        "q_delivery"
+      ]
+    },
     "main": {
       "type": "main-collection",
       "blocks": {
@@ -143,6 +194,7 @@
   },
   "order": [
     "collection_header_main",
-    "main"
+    "main",
+    "faq_collection"
   ]
 }
