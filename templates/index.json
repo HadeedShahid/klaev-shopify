@@ -6,19 +6,60 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "hero_editorial_main": {
       "type": "hero-editorial",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The Belt Collection",
+        "heading": "Quiet\nobjects,",
+        "heading_italic": "loud intent.",
+        "subtext": "Premium leather belts, hand-finished and built for the long wear. Distinct styles for every wardrobe, crafted in genuine leather.",
+        "primary_button_label": "Shop the collection",
+        "primary_button_link": "",
+        "secondary_button_label": "Our story",
+        "secondary_button_link": "",
+        "stat_1_number": "01",
+        "stat_1_label": "Genuine leather",
+        "stat_2_number": "02",
+        "stat_2_label": "8+ styles",
+        "stat_3_number": "03",
+        "stat_3_label": "Built to last"
+      }
     },
     "marquee_banner_main": {
       "type": "marquee-banner",
-      "settings": {}
+      "settings": {
+        "item_1": "Free delivery across Pakistan",
+        "item_2": "30-day returns",
+        "item_3": "100% genuine leather",
+        "item_4": "Hand-finished craftsmanship",
+        "item_5": "8+ belt styles",
+        "item_6": "Built to last"
+      }
+    },
+    "products_editorial_main": {
+      "type": "products-editorial",
+      "settings": {
+        "eyebrow": "Now / Selected",
+        "heading": "Six pieces. No noise.",
+        "view_all_label": "View all",
+        "collection": "leather-belts",
+        "products_to_show": 6
+      }
     },
     "editorial_split_main": {
       "type": "editorial-split",
-      "settings": {}
+      "settings": {
+        "image_alt": "Editorial image",
+        "eyebrow": "The Klaev way",
+        "heading": "On the\ndiscipline of",
+        "heading_italic": "subtraction.",
+        "subtext": "Genuine leather does not wear out. It wears in. Every Klaev belt develops its own patina over time, shaped by the person wearing it.",
+        "link_label": "Shop leather belts",
+        "link_url": ""
+      }
     },
     "categories_grid_main": {
       "type": "categories-grid",
@@ -30,28 +71,18 @@
         "collection_3": "leather-belts"
       }
     },
-    "products_editorial_main": {
-      "type": "products-editorial",
-      "settings": {
-        "collection": "leather-belts",
-        "products_to_show": 6
-      }
-    },
     "journal_editorial_main": {
       "type": "journal-editorial",
       "settings": {
-        "blog": "blog",
-        "articles_to_show": 3,
         "eyebrow": "Journal / Field Notes",
         "heading": "Words on the work.",
-        "view_all_label": "All articles"
+        "view_all_label": "All articles",
+        "blog": "blog",
+        "articles_to_show": 3
       }
     },
     "faq_main": {
       "type": "faq",
-      "settings": {
-        "heading": "Frequently asked questions"
-      },
       "blocks": {
         "q1": {
           "type": "question",
@@ -103,7 +134,19 @@
           }
         }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7"]
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7"
+      ],
+      "settings": {
+        "eyebrow": "Help / Common questions",
+        "heading": "Frequently asked questions"
+      }
     }
   },
   "order": [
