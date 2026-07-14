@@ -40,6 +40,29 @@
   {{ block.shopify_attributes }}
 >
   {%- if product != blank -%}
+    <div class="klaev-waitlist">
+      {%- assign waitlist_form_id = 'waitlist-form-' | append: block.id -%}
+      {%- form 'contact', id: waitlist_form_id, class: 'klaev-waitlist__form' -%}
+        <input type="hidden" name="contact[body]" value="Waitlist request for: {{ product.title }} ({{ variant.title }})">
+        <input type="hidden" name="contact[tags]" value="waitlist">
+        <p class="klaev-waitlist__label lv-text-eyebrow">Notify me when available</p>
+        <div class="klaev-waitlist__row">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="Your email"
+            required
+            class="klaev-waitlist__input"
+            aria-label="Email address"
+          >
+          <button type="submit" class="klaev-waitlist__btn lv-text-eyebrow">
+            Notify me
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+
+    {%- comment -%} Hidden product form kept for variant tracking only {%- endcomment -%}
     {%- assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id -%}
     <product-form-component
       data-section-id="{{ section.id }}"
@@ -48,6 +71,7 @@
       on:submit="/handleSubmit"
       data-quantity-default="{% if product.selected_or_first_available_variant.quantity_rule.min %}{{ product.selected_or_first_available_variant.quantity_rule.min }}{% else %}1{% endif %}"
       data-quantity-error-max="{{ 'products.product.quantity_error_max' | t }}"
+      style="display:none;"
     >
       <div
         class="visually-hidden"
@@ -365,6 +389,58 @@
 {% endif %}
 
 {% render 'buy-buttons-styles' %}
+
+{% stylesheet %}
+  .klaev-waitlist {
+    margin-block: 0.5rem;
+  }
+
+  .klaev-waitlist__label {
+    color: var(--lv-muted-foreground);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .klaev-waitlist__row {
+    display: flex;
+    gap: 0;
+  }
+
+  .klaev-waitlist__input {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--lv-border);
+    border-right: none;
+    background: var(--lv-background);
+    color: var(--lv-foreground);
+    font-size: 0.8125rem;
+    font-family: inherit;
+    outline: none;
+    min-width: 0;
+  }
+
+  .klaev-waitlist__input:focus {
+    border-color: var(--lv-ink);
+  }
+
+  .klaev-waitlist__input::placeholder {
+    color: var(--lv-muted-foreground);
+  }
+
+  .klaev-waitlist__btn {
+    padding: 1rem 1.5rem;
+    background-color: var(--lv-ink);
+    color: var(--lv-background);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  .klaev-waitlist__btn:hover {
+    opacity: 0.85;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
