@@ -137,6 +137,12 @@
     color: var(--lv-background);
   }
 
+  /* Label, count and caret set their own foreground color; inherit the inverted color when open */
+  details[open] > .facets--horizontal .facets__summary :is(.facets__label, .facets__status, .icon-caret),
+  .facets--horizontal details[open] > summary.facets__summary :is(.facets__label, .facets__status, .icon-caret) {
+    color: inherit;
+  }
+
   /* ── Sort button ── */
   .sorting-filter__horizontal .facets__summary {
     border-radius: 0;

@@ -119,6 +119,7 @@ class HeaderComponent extends Component {
       this.#menuDrawerHiddenWidth = window.innerWidth;
     } else {
       this.#menuDrawerHiddenWidth = null;
+      this.querySelector('overflow-list')?.removeAttribute('minimum-reached');
     }
     setHeaderMenuStyle();
   }
