@@ -1,0 +1,218 @@
+<section class="custom-jacket-banner">
+  {%- assign banner_alt = section.settings.image.alt | default: 'Distressed leather jacket with custom patches on a craftsman workbench' -%}
+  {%- if section.settings.image != blank -%}
+    {{
+      section.settings.image
+      | image_url: width: 2000
+      | image_tag:
+        loading: 'lazy',
+        class: 'custom-jacket-banner__image',
+        alt: banner_alt,
+        sizes: '100vw',
+        widths: '750, 1100, 1500, 2000'
+    }}
+  {%- else -%}
+    <img
+      src="https://cdn.shopify.com/s/files/1/0624/0796/6791/files/custom-jacket-banner.webp?v=1789494621"
+      alt="{{ banner_alt }}"
+      width="1376"
+      height="768"
+      loading="lazy"
+      class="custom-jacket-banner__image"
+    >
+  {%- endif -%}
+
+  <div class="custom-jacket-banner__overlay"></div>
+
+  <div class="custom-jacket-banner__inner">
+    <div class="custom-jacket-banner__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="lv-text-eyebrow custom-jacket-banner__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="lv-font-display custom-jacket-banner__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subtext != blank -%}
+        <p class="custom-jacket-banner__subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        {%- assign button_href = section.settings.button_link | default: '/pages/contact' -%}
+        <a
+          href="{{ button_href }}"
+          class="lv-text-eyebrow custom-jacket-banner__btn"
+        >
+          {{ section.settings.button_label }}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .custom-jacket-banner {
+    position: relative;
+    min-height: 30rem;
+    margin-block-end: 4rem;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 640px) {
+    .custom-jacket-banner {
+      min-height: 34rem;
+    }
+  }
+
+  .custom-jacket-banner__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .custom-jacket-banner__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      color-mix(in oklch, var(--lv-ink) 85%, transparent),
+      color-mix(in oklch, var(--lv-ink) 60%, transparent),
+      color-mix(in oklch, var(--lv-ink) 30%, transparent)
+    );
+  }
+
+  .custom-jacket-banner__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 30rem;
+    padding: 5rem 1.5rem;
+  }
+
+  @media screen and (min-width: 640px) {
+    .custom-jacket-banner__inner {
+      min-height: 34rem;
+      padding-block: 6rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .custom-jacket-banner__inner {
+      padding-block: 8rem;
+      padding-inline: max(2.5rem, calc((100vw - 90rem) / 2));
+    }
+  }
+
+  .custom-jacket-banner__content {
+    max-width: 36rem;
+  }
+
+  .custom-jacket-banner__eyebrow {
+    color: color-mix(in oklch, var(--lv-background) 70%, transparent);
+    margin: 0;
+  }
+
+  .custom-jacket-banner__heading {
+    margin: 1rem 0 0;
+    font-size: 2.25rem;
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--lv-background);
+  }
+
+  @media screen and (min-width: 768px) {
+    .custom-jacket-banner__heading {
+      font-size: 3.75rem;
+    }
+  }
+
+  .custom-jacket-banner__subtext {
+    margin: 1.25rem 0 0;
+    max-width: 28rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: color-mix(in oklch, var(--lv-background) 80%, transparent);
+  }
+
+  @media screen and (min-width: 640px) {
+    .custom-jacket-banner__subtext {
+      font-size: 1rem;
+    }
+  }
+
+  .custom-jacket-banner__btn {
+    margin-top: 2rem;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: var(--lv-background);
+    color: var(--lv-ink);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .custom-jacket-banner__btn:hover {
+    opacity: 0.9;
+  }
+
+  @media screen and (min-width: 640px) {
+    .custom-jacket-banner__btn {
+      width: auto;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Custom Jacket Banner",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Made-to-order"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Custom leather jackets."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Pick your hide, lining, hardware and fit. One piece, cut to your measurements, not a size chart."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Design yours"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Jacket Banner"
+    }
+  ]
+}
+{% endschema %}

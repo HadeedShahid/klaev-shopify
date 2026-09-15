@@ -49,6 +49,16 @@
         "products_to_show": 6
       }
     },
+    "custom_jacket_banner_main": {
+      "type": "custom-jacket-banner",
+      "settings": {
+        "eyebrow": "Made-to-order",
+        "heading": "Custom leather jackets.",
+        "subtext": "Pick your hide, lining, hardware and fit. One piece, cut to your measurements, not a size chart.",
+        "button_label": "Design yours",
+        "button_link": ""
+      }
+    },
     "editorial_split_main": {
       "type": "editorial-split",
       "settings": {
@@ -153,6 +163,7 @@
     "hero_editorial_main",
     "marquee_banner_main",
     "products_editorial_main",
+    "custom_jacket_banner_main",
     "editorial_split_main",
     "categories_grid_main",
     "journal_editorial_main",
