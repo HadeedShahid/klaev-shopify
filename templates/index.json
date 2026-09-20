@@ -12,11 +12,11 @@
     "hero_editorial_main": {
       "type": "hero-editorial",
       "settings": {
-        "eyebrow": "New / Winter 2026",
-        "heading": "The cropped\nleather jacket",
-        "heading_italic": "has arrived.",
-        "subtext": "A-grade full-grain sheepskin, cut to sit cleanly at the waist. Available now in black.",
-        "primary_button_label": "Shop the launch",
+        "eyebrow": "",
+        "heading": "Cropped Leather Jackets",
+        "heading_italic": "",
+        "subtext": "A-grade full-grain sheepskin, cut to sit cleanly at the waist. Available now.",
+        "primary_button_label": "Shop now",
         "primary_button_link": "shopify://collections/cropped-leather-jackets",
         "secondary_button_label": "",
         "secondary_button_link": "",
