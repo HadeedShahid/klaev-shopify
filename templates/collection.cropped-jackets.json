@@ -1,0 +1,207 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */{
+  "sections": {
+    "collection_header_main": {
+      "type": "collection-header",
+      "settings": {
+        "season_label": "AW·26"
+      }
+    },
+    "collection_editorial": {
+      "type": "collection-editorial",
+      "settings": {}
+    },
+    "faq_collection": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "Help / Cropped Jackets",
+        "heading": "Cropped jacket questions"
+      },
+      "blocks": {
+        "q_fit": {
+          "type": "question",
+          "settings": {
+            "question": "How should a cropped leather jacket fit?",
+            "answer": "<p>A cropped leather jacket should sit cleanly at the trouser waist rather than extending over the hips. The shoulders should align with your natural shoulder points, the chest should close comfortably over a shirt or light knit, and the hem should leave only a small amount of the layer underneath visible.</p>"
+          }
+        },
+        "q_sizing": {
+          "type": "question",
+          "settings": {
+            "question": "What size should I choose in a Klaev cropped jacket?",
+            "answer": "<p>Compare these flat garment measurements with a jacket you already own. Chest widths are S 20.5, M 21.5, L 22.5 and XL 23.5 inches. Centre-back lengths are S 22.5, M 23, L 23.5 and XL 24 inches. Choose your usual size for the intended waist-length fit, or size up if you plan to wear heavier layers.</p>"
+          }
+        },
+        "q_leather": {
+          "type": "question",
+          "settings": {
+            "question": "What leather are Klaev cropped jackets made from?",
+            "answer": "<p>Our black cropped jacket is crafted from carefully selected A-grade full-grain sheepskin. The natural grain remains intact, giving the jacket a soft hand, clean surface and subtle variation that develops character with wear. It is not bonded leather or a synthetic grain coating.</p>"
+          }
+        },
+        "q_delivery": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer free delivery and Cash on Delivery across Pakistan?",
+            "answer": "<p>Yes. Klaev offers free nationwide delivery and Cash on Delivery across Pakistan. Most orders arrive within 2 to 5 days, depending on the destination.</p>"
+          }
+        },
+        "q_care": {
+          "type": "question",
+          "settings": {
+            "question": "How should I care for full-grain sheepskin?",
+            "answer": "<p>Store the jacket on a broad hanger in a breathable cotton garment bag and keep it away from sealed plastic, direct heat and prolonged sunlight. If it gets wet, let it dry naturally at room temperature. Apply a suitable leather conditioner lightly when the leather begins to feel dry.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_fit",
+        "q_sizing",
+        "q_leather",
+        "q_delivery",
+        "q_care"
+      ]
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "filters": {
+          "type": "filters",
+          "static": true,
+          "settings": {
+            "enable_filtering": true,
+            "filter_style": "horizontal",
+            "filter_width": "full-width",
+            "text_label_case": "default",
+            "show_swatch_label": false,
+            "show_filter_label": false,
+            "enable_sorting": true,
+            "enable_grid_density": true,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "padding-block-start": 8,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "facets_margin_bottom": 8,
+            "facets_margin_right": 20
+          },
+          "blocks": {}
+        },
+        "product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "card-gallery": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_4nY4eT": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_EzJzMm": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "card-gallery",
+            "product_title_4nY4eT",
+            "price_EzJzMm"
+          ]
+        }
+      },
+      "settings": {
+        "layout_type": "grid",
+        "product_card_size": "medium",
+        "mobile_product_card_size": "small",
+        "product_grid_width": "centered",
+        "full_width_on_mobile": true,
+        "columns_gap_horizontal": 16,
+        "columns_gap_vertical": 48,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 100
+      }
+    }
+  },
+  "order": [
+    "collection_header_main",
+    "main",
+    "faq_collection",
+    "collection_editorial"
+  ]
+}

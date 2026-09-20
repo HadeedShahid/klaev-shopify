@@ -1,6 +1,11 @@
 <div class="collection-header">
   <p class="lv-text-eyebrow collection-header__eyebrow">
-    {{ collection.title }} / SS·{{ 'now' | date: '%y' }}
+    {{ collection.title }} /
+    {%- if section.settings.season_label != blank -%}
+      {{ section.settings.season_label }}
+    {%- else -%}
+      SS·{{ 'now' | date: '%y' }}
+    {%- endif -%}
   </p>
   <div class="collection-header__bottom">
     <h1 class="lv-font-display collection-header__title">
@@ -73,7 +78,14 @@
   "enabled_on": {
     "templates": ["collection"]
   },
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "season_label",
+      "label": "Season label",
+      "info": "For example, AW·26 or SS·27. Leave blank to use the current SS year."
+    }
+  ],
   "presets": []
 }
 {% endschema %}

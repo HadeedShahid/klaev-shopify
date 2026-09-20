@@ -1,8 +1,103 @@
 
 
-<script type="application/ld+json">
-  {{ closest.product | structured_data }}
-</script>
+{%- if template.suffix == 'cropped-jacket' -%}
+  {%- assign schema_product = closest.product -%}
+  {%- assign schema_currency = cart.currency.iso_code | default: shop.currency -%}
+  <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@id": {{ shop.url | append: schema_product.url | append: '#product' | json }},
+        "@type": "ProductGroup",
+        "name": {{ schema_product.title | json }},
+        "url": {{ shop.url | append: schema_product.url | json }},
+        "description": {{ schema_product.description | strip_html | strip_newlines | json }},
+        "brand": {
+          "@type": "Brand",
+          "name": {{ schema_product.vendor | default: shop.name | json }}
+        },
+        "category": "Coats & Jackets",
+        "material": "A-grade full-grain sheepskin",
+        "color": "Black",
+        "audience": {
+          "@type": "PeopleAudience",
+          "suggestedGender": "male"
+        },
+        "productGroupID": {{ schema_product.id | append: '' | json }},
+        "variesBy": ["https://schema.org/size"],
+        "image": [
+          {%- for image in schema_product.images -%}
+            {{ image | image_url: width: 2000 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ],
+        "hasVariant": [
+          {%- for variant in schema_product.variants -%}
+            {%- assign variant_image = variant.featured_image | default: schema_product.featured_image -%}
+            {
+              "@id": {{ shop.url | append: variant.url | append: '#variant' | json }},
+              "@type": "Product",
+              "name": {{ schema_product.title | append: ' - ' | append: variant.title | json }},
+              "description": {{ schema_product.description | strip_html | strip_newlines | json }},
+              "sku": {{ variant.sku | json }},
+              "size": {{ variant.option1 | json }},
+              "color": "Black",
+              "material": "A-grade full-grain sheepskin",
+              "image": {{ variant_image | image_url: width: 2000 | prepend: 'https:' | json }},
+              "offers": {
+                "@type": "Offer",
+                "url": {{ shop.url | append: variant.url | json }},
+                "price": {{ variant.price | divided_by: 100.0 | json }},
+                "priceCurrency": {{ schema_currency | json }},
+                "itemCondition": "https://schema.org/NewCondition",
+                "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+                "shippingDetails": {"@id": "#shipping_policy"},
+                "hasMerchantReturnPolicy": {"@id": "#return_policy"}
+              }
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "OfferShippingDetails",
+        "@id": "#shipping_policy",
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "PK"
+        },
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "PKR"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 2,
+            "maxValue": 5,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "MerchantReturnPolicy",
+        "@id": "#return_policy",
+        "applicableCountry": "PK",
+        "returnPolicyCountry": "PK",
+        "merchantReturnLink": {{ shop.url | append: '/policies/refund-policy' | json }},
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnMethod": "https://schema.org/ReturnByMail"
+      }
+    ]
+  </script>
+{%- else -%}
+  <script type="application/ld+json">
+    {{ closest.product | structured_data }}
+  </script>
+{%- endif -%}
 
 {% capture media_gallery %}
   {%- content_for 'block',
