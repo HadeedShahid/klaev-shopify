@@ -59,16 +59,14 @@
         "button_link": ""
       }
     },
-    "editorial_split_main": {
-      "type": "editorial-split",
+    "leather_jackets_main": {
+      "type": "products-editorial",
       "settings": {
-        "image_alt": "Editorial image",
-        "eyebrow": "The Klaev way",
-        "heading": "On the\ndiscipline of",
-        "heading_italic": "subtraction.",
-        "subtext": "Genuine leather does not wear out. It wears in. Every Klaev belt develops its own patina over time, shaped by the person wearing it.",
-        "link_label": "Shop leather belts",
-        "link_url": ""
+        "eyebrow": "Shop / Leather Jackets",
+        "heading": "Leather jackets.",
+        "view_all_label": "View all",
+        "collection": "leather-jackets",
+        "products_to_show": 12
       }
     },
     "categories_grid_main": {
@@ -164,7 +162,7 @@
     "marquee_banner_main",
     "products_editorial_main",
     "custom_jacket_banner_main",
-    "editorial_split_main",
+    "leather_jackets_main",
     "categories_grid_main",
     "journal_editorial_main",
     "faq_main"
