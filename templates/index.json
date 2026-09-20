@@ -17,7 +17,7 @@
         "heading_italic": "loud intent.",
         "subtext": "Genuine lambskin, cut to a clean cropped fit. The one jacket you will reach for every day.",
         "primary_button_label": "Shop the collection",
-        "primary_button_link": "shopify://collections/leather-jackets",
+        "primary_button_link": "shopify://collections/cropped-leather-jackets",
         "secondary_button_label": "",
         "secondary_button_link": "",
         "stat_1_number": "01",
@@ -42,10 +42,10 @@
     "products_editorial_main": {
       "type": "products-editorial",
       "settings": {
-        "eyebrow": "Now / Selected",
-        "heading": "Six pieces. No noise.",
+        "eyebrow": "Now / Cropped",
+        "heading": "The cropped edit.",
         "view_all_label": "View all",
-        "collection": "leather-belts",
+        "collection": "cropped-leather-jackets",
         "products_to_show": 6
       }
     },
@@ -76,9 +76,9 @@
       "settings": {
         "eyebrow": "Shop / Collections",
         "heading": "The full edit.",
-        "collection_1": "leather-jackets",
-        "collection_2": "suede-jackets",
-        "collection_3": "leather-belts"
+        "collection_1": "cropped-leather-jackets",
+        "collection_2": "leather-jackets",
+        "collection_3": "suede-jackets"
       }
     },
     "journal_editorial_main": {
