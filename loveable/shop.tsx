@@ -35,10 +35,10 @@ function Shop() {
         <p className="text-eyebrow text-muted-foreground">Collection / SS·26</p>
         <div className="mt-4 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <h1 className="font-display text-5xl leading-[0.95] md:text-7xl">
-            All objects<span className="italic font-light"> — index.</span>
+            All objects
           </h1>
           <p className="max-w-sm text-sm text-muted-foreground">
-            {filtered.length * 4} pieces in current rotation. Sorted by intent.
+            {filtered.length * 4} pieces in current rotation.
           </p>
         </div>
       </section>

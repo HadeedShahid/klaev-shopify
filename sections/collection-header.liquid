@@ -4,10 +4,10 @@
   </p>
   <div class="collection-header__bottom">
     <h1 class="lv-font-display collection-header__title">
-      {{ collection.title }}<span class="collection-header__title-italic"> — index.</span>
+      {{ collection.title }}
     </h1>
     <p class="collection-header__count">
-      {{ collection.products_count }} pieces in current rotation. Sorted by intent.
+      {{ collection.products_count }} {% if collection.products_count == 1 %}piece{% else %}pieces{% endif %} in current rotation.
     </p>
   </div>
 </div>
@@ -57,11 +57,6 @@
     .collection-header__title {
       font-size: 4.5rem;
     }
-  }
-
-  .collection-header__title-italic {
-    font-style: italic;
-    font-weight: 300;
   }
 
   .collection-header__count {
