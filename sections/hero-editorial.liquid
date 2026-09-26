@@ -63,35 +63,56 @@
     {%- comment -%} ── Image column ── {%- endcomment -%}
     <div class="hero-editorial__media">
       {%- assign hero_default_alt = 'Klaev black cropped leather jacket in full-grain sheepskin, Pakistan' -%}
-      {%- if section.settings.image != blank -%}
-        {%- assign hero_alt = section.settings.image.alt | default: hero_default_alt -%}
+      {%- assign hero_mobile_image = section.settings.image -%}
+      {%- assign hero_desktop_image = section.settings.desktop_image | default: hero_mobile_image -%}
+      {%- assign hero_alt_source = hero_desktop_image | default: hero_mobile_image -%}
+      {%- if hero_alt_source != blank -%}
+        {%- assign hero_alt = hero_alt_source.alt | default: hero_default_alt -%}
         {%- comment -%} Override generic file alts that don't help SEO {%- endcomment -%}
         {%- assign hero_alt_lower = hero_alt | downcase | strip -%}
         {%- if hero_alt_lower == 'hero' or hero_alt_lower == 'image' or hero_alt_lower == 'photo' or hero_alt_lower == 'untitled' or hero_alt_lower == 'img' or hero_alt_lower == 'picture' -%}
           {%- assign hero_alt = hero_default_alt -%}
         {%- endif -%}
-        {{
-          section.settings.image
-          | image_url: width: 1600
-          | image_tag:
-            loading: 'eager',
-            fetchpriority: 'high',
-            class: 'hero-editorial__image',
-            alt: hero_alt,
-            sizes: '(min-width: 1024px) 58vw, 100vw',
-            widths: '600, 900, 1200, 1600'
-        }}
-      {%- else -%}
-        <img
-          src="{{ 'Hero-section.webp' | asset_url }}"
-          alt="{{ hero_default_alt }}"
-          class="hero-editorial__image"
-          width="2000"
-          height="2400"
-          loading="eager"
-          fetchpriority="high"
-        >
       {%- endif -%}
+      <picture>
+        {%- if hero_desktop_image != blank -%}
+          <source
+            media="(min-width: 1024px)"
+            srcset="
+              {{ hero_desktop_image | image_url: width: 900 }} 900w,
+              {{ hero_desktop_image | image_url: width: 1200 }} 1200w,
+              {{ hero_desktop_image | image_url: width: 1600 }} 1600w,
+              {{ hero_desktop_image | image_url: width: 2048 }} 2048w
+            "
+            sizes="58vw"
+          >
+        {%- else -%}
+          <source media="(min-width: 1024px)" srcset="{{ 'Hero-section-desktop.webp' | asset_url }}">
+        {%- endif -%}
+        {%- if hero_mobile_image != blank -%}
+          {{
+            hero_mobile_image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'eager',
+              fetchpriority: 'high',
+              class: 'hero-editorial__image',
+              alt: hero_alt,
+              sizes: '100vw',
+              widths: '600, 900, 1200, 1600'
+          }}
+        {%- else -%}
+          <img
+            src="{{ 'Hero-section.webp' | asset_url }}"
+            alt="{{ hero_default_alt }}"
+            class="hero-editorial__image"
+            width="2000"
+            height="2400"
+            loading="eager"
+            fetchpriority="high"
+          >
+        {%- endif -%}
+      </picture>
     </div>
 
   </div>
@@ -388,8 +409,13 @@
     },
     {
       "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "Mobile image"
     }
   ],
   "presets": [
